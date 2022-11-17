@@ -4,7 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import { getBlogs2 } from "../../library/wpcms-stories";
 import { getCategories } from "../../library/wpcms-stories-categories";
 const response2 = await getBlogs2({ fields: ["id", "title"] });
-const response3 = await getCategories({ fields: ["id", "title"] });
+const categories = await getCategories({ fields: ["id", "title"] });
 ---
 
 <Layout title="My first blog with Astro">
@@ -24,7 +24,7 @@ const response3 = await getCategories({ fields: ["id", "title"] });
             <h2 class="p-story-header__heading">カテゴリー選択</h2>
             <div class="p-story-header__tag-list">
               {
-                response3.contents.map((content: any) => (
+                categories.contents.map((content: any) => (
                   <label class="c-radio-tag">
                     <input
                       class="c-radio-tag__input"

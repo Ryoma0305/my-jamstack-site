@@ -17,7 +17,6 @@ export type BlogResponse = {
 
 //APIの呼び出し
 export const getBlogs2 = async (queries?: MicroCMSQueries) => {
-  //   return await client.get<BlogResponse>({ endpoint: "blogs", queries });
   const data = await fetchAPI("", {});
   //   console.log(data);
   return { contents: data };
@@ -45,7 +44,7 @@ async function fetchAPI(query, { variables } = {}) {
   );
 
   const json = await res.json();
-  console.log(json);
+  //   console.log(json);
   return json.map((item: any) => {
     return {
       id: item.ID,
@@ -53,10 +52,18 @@ async function fetchAPI(query, { variables } = {}) {
       updatedAt: item.modified,
       publishedAt: item.modified,
       revisedAt: item.modified,
+      service_title: item.service_title,
+      lead_text: item.lead_text,
       title: item.title,
       content: item.content,
-      lead_text: item.lead_text,
       service_tag: item.service_tag,
+      main_img: item.main_img,
+      og_img: item.og_img,
+      events: [item.events],
+      gallery: item.gallery,
+      related_story_post1: [item.related_story_post1],
+      related_story_post2: [item.related_story_post2],
+      related_story_post3: [item.related_story_post3],
     };
   });
 }
