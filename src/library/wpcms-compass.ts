@@ -1,16 +1,13 @@
 //型定義
 
 //APIの呼び出し
-export const getCompass = async (queries?: MicroCMSQueries) => {
+export const getCompass = async () => {
   //   return await client.get<BlogResponse>({ endpoint: "blogs", queries });
   const data = await fetchAPI("", {});
   return { contents: data };
 };
 
-export const getCompassDetail = async (
-  contentId: string,
-  queries?: MicroCMSQueries
-) => {
+export const getCompassDetail = async (contentId: string) => {
   const data = await fetchAPI("", {});
   return data.filter((item: any) => {
     return item.id == contentId;

@@ -1,0 +1,94 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCompass, getCompassDetail } from "../../library/wpcms-compass";
+const compassList = await getCompass({ fields: ["id", "title"] });
+
+// 詳細記事ページの全パスを取得
+export async function getStaticPaths() {
+  const response = await getCompass({ fields: ["id", "title"] });
+  return response.contents.map((content: any) => ({
+    params: {
+      compassId: content.id,
+    },
+  }));
+}
+
+//記事の詳細情報を取得
+const { compassId } = Astro.params;
+const compass = await getCompassDetail(compassId as string);
+---
+
+<Layout title="My first blog with Astro">
+  <div class="p-about-kv2">
+    <div class="p-about-kv2__unit1">
+      <div class="p-about-kv2__unit1__inner1">
+        <h1 class="p-about-kv2__unit1__title1">
+          {compass.title}
+        </h1>
+        <p class="p-about-kv2__unit1__text1">
+          Update {compass.update_date}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="p-about-block7">
+    <div class="p-about-block7__inner1">
+      <div class="p-about-block7__editor1">
+        <div class="p-about-block7__item p-about-block7__speaker">
+          <h2 class="p-about-block7__speaker-heading">
+            {compass.speaker.heading}
+          </h2>
+          <p class="p-about-block7__speaker-text">
+            {compass.speaker.text}
+          </p>
+        </div>
+        {
+          compass.dialog.map((content: any) => (
+            <div class="p-about-block7__item">
+              <h2>{content.name}</h2>
+              <p>{content.text}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="p-about-block7__text1">
+        {compass.description}
+      </p>
+    </div>
+  </div>
+  <section class="p-about-block3">
+    <div class="p-about-block3__inner1">
+      <div>
+        <h2 class="p-about-block3__title1">コンパス</h2>
+        <p class="p-about-block3__text1">
+          コンパスのリード文を入れる、自己づくり、チームづくり、まちづくりの<br
+          />3つの軸で事業を展開しています。
+        </p>
+      </div>
+      <ul class="p-about-block3__list1">
+        {
+          compassList.contents.map((content: any) => (
+            <li class="">
+              <a href={"/about/" + content.id} class="p-about-block3__unit1">
+                <div class="p-about-block3__unit1__title1-wrapper">
+                  <p class="p-about-block3__unit1__title1">{content.title}</p>
+                </div>
+                <p class="p-about-block3__unit1__text1">
+                  {content.update_date} Update
+                </p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  main {
+    margin: auto;
+    padding: 1em;
+    max-width: 60ch;
+  }
+</style>

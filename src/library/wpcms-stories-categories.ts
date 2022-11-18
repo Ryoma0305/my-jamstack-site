@@ -1,10 +1,8 @@
 //型定義
 
-export const getCategories = async (queries?: MicroCMSQueries) => {
+export const getCategories = async () => {
   //   return await client.get<BlogResponse>({ endpoint: "blogs", queries });
   const cat = await fetchAPI("", {});
-  console.log("catです");
-  console.log(cat);
   return { contents: cat };
 };
 
@@ -19,7 +17,7 @@ async function fetchAPI(query, { variables } = {}) {
   );
 
   const json = await res.json();
-  //   console.log(json2);
+  //   console.log(json);
   return json.map((item: any) => {
     return {
       term_id: item.term_id,

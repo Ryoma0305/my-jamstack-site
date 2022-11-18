@@ -1,18 +1,23 @@
 //型定義
 
 //APIの呼び出し
-export const getAuthors = async () => {
+export const getForbiz = async () => {
   //   return await client.get<BlogResponse>({ endpoint: "blogs", queries });
   const data = await fetchAPI("", {});
-  console.log("dataです");
-  console.log(data);
   return { contents: data };
+};
+
+export const getForbizDetail = async (contentId: string) => {
+  const data = await fetchAPI("", {});
+  return data.filter((item: any) => {
+    return item.id == contentId;
+  })[0];
 };
 
 async function fetchAPI(query, { variables } = {}) {
   const headers = { "Content-Type": "application/json" };
   const res = await fetch(
-    "http://practicearimuraryomacom.local/wp-json/wp/api/authors",
+    "http://practicearimuraryomacom.local/wp-json/wp/api/forbiz",
     {
       method: "GET",
       headers,
@@ -21,19 +26,18 @@ async function fetchAPI(query, { variables } = {}) {
   );
 
   const json = await res.json();
-  //   console.log(json);
   return json.map((item: any) => {
     return {
       id: item.ID,
       createdAt: item.date,
+      updatedAt: item.modified,
+      publishedAt: item.modified,
+      revisedAt: item.modified,
       title: item.title,
       content: item.content,
-      author_img: item.author_img,
-      name_jp: item.name_jp,
-      name_en: item.name_en,
-      profile_text: item.profile_text,
-      related_post1: [item.related_post1],
-      related_post2: [item.related_post2],
+      category: item.category,
+      main_img: item.main_img,
+      thumbnail_img: item.thumbnail_img,
     };
   });
 }

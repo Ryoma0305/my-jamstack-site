@@ -13,6 +13,8 @@ export async function getStaticPaths() {
   }));
 }
 
+const response2 = await getBlogs2({ fields: ["id", "title"] });
+
 //記事の詳細情報を取得
 const { serviceId } = Astro.params;
 const service = await getBlogDetail2(serviceId as string);
@@ -40,9 +42,7 @@ const service = await getBlogDetail2(serviceId as string);
         <h2 class="c-section-header__heading">サービス詳細</h2>
       </header>
       <div class="l-contents__wrapper p-service-detail-description">
-        <div class="p-service-detail-description__text-group">
-          {service.content}
-        </div>
+        <Fragment set:html={service.content} />
         <ul class="p-service-detail-section__tag-list">
           {
             service.service_tag.map((content: any) => (
@@ -118,86 +118,54 @@ const service = await getBlogDetail2(serviceId as string);
         <h2 class="c-section-header__heading">その他のおすすめサービス</h2>
       </header>
       <div class="l-contents__wrapper p-service-detail-recommend">
-        <section class="p-service-detail-recommend__item">
-          <div class="p-service-detail-recommend__text-block">
-            <h3 class="p-service-detail-recommend__heading">
-              <a
-                class="p-service-detail-recommend__link"
-                href="https://hagukumu.develop999.net/services/80/"
-                >ライフデザインスクール</a
-              >
-            </h3>
-            <p class="p-service-detail-recommend__text">
-              自分の実現したい未来を生きるための<br />
-              グループコーチング型スクール
-            </p>
-            <ul class="p-service-detail-recommend__tag-list">
-              <li class="p-service-detail-recommend__tag-item">オンライン</li>
-              <li class="p-service-detail-recommend__tag-item">リアル開催</li>
-              <li class="p-service-detail-recommend__tag-item">コース</li>
-            </ul>
-          </div>
-          <figure class="p-service-detail-recommend__media">
-            <img
-              class="p-service-detail-recommend__image"
-              src="https://hagukumu.develop999.net/wp-content/uploads/2022/09/illust-6.png"
-              alt=""
-            />
-          </figure>
-        </section>
-        <section class="p-service-detail-recommend__item">
-          <div class="p-service-detail-recommend__text-block">
-            <h3 class="p-service-detail-recommend__heading">
-              <a
-                class="p-service-detail-recommend__link"
-                href="https://hagukumu.develop999.net/services/301/"
-                >はぐくむコーチングスクール</a
-              >
-            </h3>
-            <p class="p-service-detail-recommend__text">
-              コーチングを通じて関わる人の実現したい未来に<br />
-              寄り添うあり方と技術を学ぶ
-            </p>
-            <ul class="p-service-detail-recommend__tag-list">
-              <li class="p-service-detail-recommend__tag-item">オンライン</li>
-              <li class="p-service-detail-recommend__tag-item">リアル開催</li>
-              <li class="p-service-detail-recommend__tag-item">コース</li>
-            </ul>
-          </div>
-          <figure class="p-service-detail-recommend__media">
-            <img
-              class="p-service-detail-recommend__image"
-              src="https://hagukumu.develop999.net/wp-content/uploads/2022/09/illust-7.png"
-              alt=""
-            />
-          </figure>
-        </section>
-        <section class="p-service-detail-recommend__item">
-          <div class="p-service-detail-recommend__text-block">
-            <h3 class="p-service-detail-recommend__heading">
-              <a
-                class="p-service-detail-recommend__link"
-                href="https://hagukumu.develop999.net/services/344/"
-                >高校生コーチング</a
-              >
-            </h3>
-            <p class="p-service-detail-recommend__text">
-              偏差値だけで選ぶ大学選びから<br />
-              やりたいことで選ぶ進路選択へ
-            </p>
-            <ul class="p-service-detail-recommend__tag-list">
-              <li class="p-service-detail-recommend__tag-item">オンライン</li>
-              <li class="p-service-detail-recommend__tag-item">コース</li>
-            </ul>
-          </div>
-          <figure class="p-service-detail-recommend__media">
-            <img
-              class="p-service-detail-recommend__image"
-              src="https://hagukumu.develop999.net/wp-content/uploads/2022/09/illust-5.png"
-              alt=""
-            />
-          </figure>
-        </section>
+        {
+          response2.contents
+            .filter((content: any) => {
+              if (content.service_tag.length == 0) {
+                return false;
+              }
+              if (
+                content.service_tag[0].term_id !=
+                  service.service_tag[0].term_id ||
+                content.id == service.id
+              ) {
+                return false;
+              }
+              return true;
+            })
+            .slice(0, 3)
+            .map((content: any) => (
+              <section class="p-service-detail-recommend__item">
+                <div class="p-service-detail-recommend__text-block">
+                  <h3 class="p-service-detail-recommend__heading">
+                    <a
+                      class="p-service-detail-recommend__link"
+                      href={"/services/" + content.id}
+                    >
+                      {content.title}
+                    </a>
+                  </h3>
+                  <p class="p-service-detail-recommend__text">
+                    {content.lead_text}
+                  </p>
+                  <ul class="p-service-detail-recommend__tag-list">
+                    {content.service_tag.map((s: any) => (
+                      <li class="p-service-detail-recommend__tag-item">
+                        {s.name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <figure class="p-service-detail-recommend__media">
+                  <img
+                    class="p-service-detail-recommend__image"
+                    src={content.main_img.url}
+                    alt=""
+                  />
+                </figure>
+              </section>
+            ))
+        }
       </div>
     </section>
     <div class="l-sticky-footer p-sticky-footer">

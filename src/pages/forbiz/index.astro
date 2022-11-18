@@ -1,0 +1,240 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+import { getForbiz } from "../../library/wpcms-forbiz";
+const response = await getForbiz({ fields: ["id", "title"] });
+---
+
+<Layout title="My first blog with Astro">
+  <div class="p-forbiz-kv1">
+    <div class="p-forbiz-kv1__inner1 js-fade-in-scroll-ul">
+      <h1
+        class="p-forbiz-kv1__title1 js-fade-in-scroll-li"
+        style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+      >
+        WORK <br />DESIGN
+      </h1>
+      <p
+        class="p-forbiz-kv1__text1 js-fade-in-scroll-li"
+        style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+      >
+        会社は何のために存在しているのか？<br
+        />自分達は何を目指し、何のために活動しているのか？<br
+        />会社は利益のために存在しているわけでもないし、社員は会社の数字を上げるために存在しているわけでもない。<br
+        />社会の中における自社の存在目的と、その実現したい未来に向かって、共に関わり合うメンバーが自らの才能や個性をイキイキと表現しながら、人間らしく在れる”生命的”な会社をはぐくんでいくお手伝い。<br
+        />それがはぐくむがお役立ちしたいこと。
+      </p>
+    </div>
+  </div>
+  <section class="p-forbiz-block1 p-forbiz-block1__scroll-margin">
+    <div class="p-forbiz-block1__inner1">
+      <h2
+        class="p-forbiz-block1__title1 js-fade-in-scroll"
+        style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+      >
+        森のような<br />組織づくりの物語
+      </h2>
+      <p
+        class="p-forbiz-block1__text1 js-fade-in-scroll"
+        style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+      >
+        はぐくむではこれまで業種や規模を問わずさまざまな企業様に対して、<br
+        />組織づくりのお手伝いをさせていただきました。<br
+        />その中で生まれた物語の一部をご紹介いたします。
+      </p>
+      <ul class="p-forbiz-block1__list p-story-body__list js-fade-in-scroll-ul">
+        {
+          response.contents.map((content: any) => (
+            <li
+              class="p-story js-fade-in-scroll-li"
+              style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+            >
+              <a class="p-story__text" href={"/stories/" + content.id}>
+                {content.title}
+              </a>
+              <ul class="p-story__tag-list">
+                <li>
+                  <a
+                    class="c-tag"
+                    href="https://hagukumu.develop999.net//stories/?category=work-design"
+                  >
+                    {content.category}
+                  </a>
+                </li>
+              </ul>
+              <figure class="p-story__media p-service-detail-story__media">
+                <img
+                  class="p-story__image"
+                  src="https://hagukumu.develop999.net/wp-content/uploads/2022/10/スクリーンショット-2022-10-18-23.39.39-556x340.png"
+                  alt=""
+                />
+              </figure>
+            </li>
+          ))
+        }
+      </ul>
+      <p
+        class="p-forbiz-block1__button1 js-fade-in-scroll"
+        style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+      >
+        <a
+          href="/stories/?category=work-design"
+          class="c-button -primary -fix -for-biz"
+        >
+          ストーリー 一覧
+        </a>
+      </p>
+      <p
+        class="p-forbiz-block1__banner1 js-fade-in-scroll"
+        style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+      >
+        <a href="https://anchor.fm/vhcc3m7vopg" target="_blank">
+          <span class="p-forbiz-block1__banner1__sp1"
+            ><img
+              src="https://hagukumu.develop999.net/wp-content/themes/hagukumu.co.jp/assets/static/images/forbiz/block1_banner1_1.png"
+              alt="\ 聞く、はぐくむ / 代表 小寺毅によるPodcastsも配信中"
+            />
+          </span>
+          <span class="p-forbiz-block1__banner1__pc1"
+            ><img
+              src="https://hagukumu.develop999.net/wp-content/themes/hagukumu.co.jp/assets/static/images/forbiz/block1_banner1_1_pc.png"
+              alt="\ 聞く、はぐくむ / 代表 小寺毅によるPodcastsも配信中"
+            />
+          </span>
+        </a>
+      </p>
+    </div>
+  </section>
+  <section class="p-forbiz-block2 p-forbiz-block2__scroll-margin" id="section1">
+    <div class="p-forbiz-block2__inner1">
+      <div class="js-fade-in-scroll-ul">
+        <h2
+          class="p-forbiz-block2__title1 js-fade-in-scroll-li"
+          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+        >
+          森のような組織を<br />はぐくむためにできること
+        </h2>
+        <p
+          class="p-forbiz-block2__text1 js-fade-in-scroll-li"
+          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+        >
+          一人ひとりの才能や個性を発揮するために、企業・組織に伴走する6つのプログラム。<br
+          />対話を通じて想いを言葉にし、チームの関係性を整え、<br
+          />そのチームに相応しい文化をはぐくみます。
+        </p>
+      </div>
+      <ul class="p-forbiz-block2__list1 js-fade-in-scroll-ul">
+        <li
+          class="js-fade-in-scroll-li"
+          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+        >
+          <div class="p-forbiz-block2__unit1">
+            <h3 class="p-forbiz-block2__unit1__title1">チームセッション</h3>
+            <p class="p-forbiz-block2__unit1__text1">
+              豊かな関係性こそが組織の土壌であり、豊かな未来づくりの鍵です。それは、毎月のチームセッションから始めるのがオススメ。普段話し合えない大切なことについてじっくり対話すれば、チームの土壌は確実に変化していきます。
+            </p>
+          </div>
+        </li>
+        <li
+          class="js-fade-in-scroll-li"
+          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+        >
+          <div class="p-forbiz-block2__unit1">
+            <h3 class="p-forbiz-block2__unit1__title1">オフサイトセッション</h3>
+            <p class="p-forbiz-block2__unit1__text1">
+              四半期〜半年毎に自然豊かな場所へ出かけ、とことん語りあったり、身体感覚を伴って感じたことを分かちあう。同じ時間と体験の中で、それぞれが感じる”感覚”や”感情”を重ねることでチームの関係性と共通感覚を育みます。
+            </p>
+          </div>
+        </li>
+        <li
+          class="js-fade-in-scroll-li"
+          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+        >
+          <div class="p-forbiz-block2__unit1">
+            <h3 class="p-forbiz-block2__unit1__title1">
+              森のような組織のはぐくみ方研修
+            </h3>
+            <p class="p-forbiz-block2__unit1__text1">
+              人をパーツのように捉える機械論的な経営ではなく、個性や才能の輝きを尊重する経営。その”答え”や”方法”を教える場ではなく、経営やチームづくりを探求する機会として、様々な情報提供とともに対話する時間を提供します。
+            </p>
+          </div>
+        </li>
+        <li
+          class="js-fade-in-scroll-li"
+          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+        >
+          <div class="p-forbiz-block2__unit1">
+            <h3 class="p-forbiz-block2__unit1__title1">リフレクション研修</h3>
+            <p class="p-forbiz-block2__unit1__text1">
+              自分たちのこれまでの歩みに対して感じていることを遠慮なく本音で語り合えるのが良質なチーム。率直でオープンなやりとりを大切にしながら、自分たちの実りと実らなかったものの両方を収穫として、次なる道筋を展望します。
+            </p>
+          </div>
+        </li>
+        <li
+          class="js-fade-in-scroll-li"
+          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+        >
+          <div class="p-forbiz-block2__unit1">
+            <h3 class="p-forbiz-block2__unit1__title1">1on1コーチング</h3>
+            <p class="p-forbiz-block2__unit1__text1">
+              どこに向かいたいのか、それはなぜなのか。個々の才能が輝き、響きあうチームでは、それぞれの想いを言葉にできるもの。一人ひとりの願いに目を向け、そこから湧きあがる実現したい未来に向けて生きる日々をサポートします。
+            </p>
+          </div>
+        </li>
+        <li
+          class="js-fade-in-scroll-li"
+          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+        >
+          <div class="p-forbiz-block2__unit1">
+            <h3 class="p-forbiz-block2__unit1__title1">
+              はぐくむ式コーチング研修
+            </h3>
+            <p class="p-forbiz-block2__unit1__text1">
+              コミュニケーションの質が、人生の質を左右する。そして、豊かな対話文化は、豊かな関係性の土壌を生み、多くの実りにつながっていく。社内コーチの育成にとどまらず、チーム全体のコミュニケーション文化を育みます。
+            </p>
+          </div>
+        </li>
+      </ul>
+      <div class="js-fade-in-scroll-ul">
+        <p
+          class="p-forbiz-block2__banner1 js-fade-in-scroll-li"
+          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+        >
+          <a href="https://hagukumu.develop999.net/stories/559/">
+            <span class="p-forbiz-block2__banner1__sp1"
+              ><img
+                src="https://hagukumu.develop999.net/wp-content/themes/hagukumu.co.jp/assets/static/images/forbiz/block2_banner1_1.png"
+                alt="\ プログラムで実際に使用するシートを特別配布中 / ワークシートサンプルダウンロード"
+              />
+            </span>
+            <span class="p-forbiz-block2__banner1__pc1"
+              ><img
+                src="https://hagukumu.develop999.net/wp-content/themes/hagukumu.co.jp/assets/static/images/forbiz/block2_banner1_1_pc.png"
+                alt="\ 森のような組織づくりに関心のある人へ / 会社で、チームで、使えるワークシートを配布中"
+              />
+            </span>
+          </a>
+        </p>
+        <p
+          class="p-forbiz-block2__banner1 js-fade-in-scroll-li"
+          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+        >
+          <a href="https://hagukumu.develop999.net/entry-forbiz">
+            <span class="p-forbiz-block2__banner1__sp1"
+              ><img
+                src="https://hagukumu.develop999.net/wp-content/themes/hagukumu.co.jp/assets/static/images/forbiz/block2_banner1_2.png"
+                alt="実施プログラムや費用などまずはお気軽にご相談ください 顧問契約について相談する"
+              />
+            </span>
+            <span class="p-forbiz-block2__banner1__pc1"
+              ><img
+                src="https://hagukumu.develop999.net/wp-content/themes/hagukumu.co.jp/assets/static/images/forbiz/block2_banner1_2_pc.png"
+                alt="\ 実施プログラムや費用などまずはお気軽にご相談ください / 顧問契約について相談する"
+              />
+            </span>
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

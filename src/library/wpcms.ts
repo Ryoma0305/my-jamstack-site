@@ -16,20 +16,19 @@ export type BlogResponse = {
 };
 
 //APIの呼び出し
-export const getBlogs2 = async (queries?: MicroCMSQueries) => {
+export const getBlogs2 = async () => {
   const data = await fetchAPI("", {});
   //   console.log(data);
   return { contents: data };
 };
 
-export const getBlogDetail2 = async (
-  contentId: string,
-  queries?: MicroCMSQueries
-) => {
+export const getBlogDetail2 = async (contentId: string) => {
   const data = await fetchAPI("", {});
-  return data.filter((item: any) => {
+  const ret = data.filter((item: any) => {
     return item.id == contentId;
   })[0];
+  console.log(ret);
+  return ret;
 };
 
 async function fetchAPI(query, { variables } = {}) {
@@ -46,6 +45,10 @@ async function fetchAPI(query, { variables } = {}) {
   const json = await res.json();
   //   console.log(json);
   return json.map((item: any) => {
+    if (!item.service_tag) {
+      item.service_tag = [];
+    }
+    // console.log(item.service_tag);
     return {
       id: item.ID,
       createdAt: item.date,
@@ -56,7 +59,7 @@ async function fetchAPI(query, { variables } = {}) {
       lead_text: item.lead_text,
       title: item.title,
       content: item.content,
-      service_tag: item.service_tag,
+      service_tag: item.service_tag ?? [],
       main_img: item.main_img,
       og_img: item.og_img,
       events: [item.events],
