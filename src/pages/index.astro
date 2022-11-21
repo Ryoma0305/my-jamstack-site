@@ -1,11 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-//microCMS呼び出し
-import { getBlogs } from "../library/microcms";
+import { getStoryPosts } from "../library/wpcms-stories";
 import { getBlogs2 } from "../library/wpcms";
-const response = await getBlogs({ fields: ["id", "title"] });
+import { getThemes } from "../library/wpcms-service-theme";
+const response = await getStoryPosts({ fields: ["id", "title"] });
 const response2 = await getBlogs2({ fields: ["id", "title"] });
+const themes = await getThemes({ fields: ["id", "title"] });
 ---
 
 <Layout title="My first blog with Astro">
@@ -641,90 +642,38 @@ const response2 = await getBlogs2({ fields: ["id", "title"] });
             自己をはぐくむ Self Design
           </h3>
           <ul class="p-top-block2__unit1__nav1__list1">
-            <li>
-              <a
-                class="c-button-with-icon -self-design"
-                href="https://hagukumu.develop999.net/?post_type=services&p=80"
-              >
-                <span class="c-button-with-icon__circle">
-                  <svg
-                    width="19"
-                    height="18"
-                    viewBox="0 0 19 18"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
-                      fill="currentColor"></path>
-                  </svg>
-                </span>
-                ライフデザインスクール
-              </a>
-            </li>
-            <li>
-              <a
-                class="c-button-with-icon -self-design"
-                href="https://hagukumu.develop999.net/?post_type=services&p=301"
-              >
-                <span class="c-button-with-icon__circle">
-                  <svg
-                    width="19"
-                    height="18"
-                    viewBox="0 0 19 18"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
-                      fill="currentColor"></path>
-                  </svg>
-                </span>
-                はぐくむコーチングスクール
-              </a>
-            </li>
-            <li>
-              <a
-                class="c-button-with-icon -self-design"
-                href="https://hagukumu.develop999.net/?post_type=services&p=130"
-              >
-                <span class="c-button-with-icon__circle">
-                  <svg
-                    width="19"
-                    height="18"
-                    viewBox="0 0 19 18"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
-                      fill="currentColor"></path>
-                  </svg>
-                </span>
-                はぐくむの森リフレクション
-              </a>
-            </li>
-            <li>
-              <a
-                class="c-button-with-icon -self-design"
-                href="https://hagukumu.develop999.net/?post_type=services&p=85"
-              >
-                <span class="c-button-with-icon__circle">
-                  <svg
-                    width="19"
-                    height="18"
-                    viewBox="0 0 19 18"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
-                      fill="currentColor"></path>
-                  </svg>
-                </span>
-                はぐくむサウナリトリート
-              </a>
-            </li>
+            {
+              response2.contents
+                .filter((content: any) => {
+                  if (content.service_category != false) {
+                    return content.service_category[0].term_id == 27;
+                  }
+                })
+                .map((content: any) => (
+                  <li>
+                    <a
+                      class="c-button-with-icon -self-design"
+                      href={"/services/" + content.id}
+                    >
+                      <span class="c-button-with-icon__circle">
+                        <svg
+                          width="19"
+                          height="18"
+                          viewBox="0 0 19 18"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </span>
+                      {content.title}
+                    </a>
+                  </li>
+                ))
+            }
           </ul>
 
           <h3 class="p-top-block2__unit1__nav1__title1 -type2">
@@ -755,48 +704,38 @@ const response2 = await getBlogs2({ fields: ["id", "title"] });
             街をはぐくむ Town Design
           </h3>
           <ul class="p-top-block2__unit1__nav1__list1">
-            <li>
-              <a
-                class="c-button-with-icon -town-design"
-                href="https://hagukumu.develop999.net/?post_type=services&p=84"
-              >
-                <span class="c-button-with-icon__circle">
-                  <svg
-                    width="19"
-                    height="18"
-                    viewBox="0 0 19 18"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
-                      fill="currentColor"></path>
-                  </svg>
-                </span>
-                はぐくむハウス
-              </a>
-            </li>
-            <li>
-              <a
-                class="c-button-with-icon -town-design"
-                href="https://hagukumu.develop999.net/?post_type=services&p=304"
-              >
-                <span class="c-button-with-icon__circle">
-                  <svg
-                    width="19"
-                    height="18"
-                    viewBox="0 0 19 18"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
-                      fill="currentColor"></path>
-                  </svg>
-                </span>
-                コミュニティカフェ「はぐくむ湖畔」
-              </a>
-            </li>
+            {
+              response2.contents
+                .filter((content: any) => {
+                  if (content.service_category != false) {
+                    return content.service_category[0].term_id == 25;
+                  }
+                })
+                .map((content: any) => (
+                  <li>
+                    <a
+                      class="c-button-with-icon -town-design"
+                      href={"/services/" + content.id}
+                    >
+                      <span class="c-button-with-icon__circle">
+                        <svg
+                          width="19"
+                          height="18"
+                          viewBox="0 0 19 18"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </span>
+                      {content.title}
+                    </a>
+                  </li>
+                ))
+            }
           </ul>
         </div>
       </div>
@@ -825,13 +764,13 @@ const response2 = await getBlogs2({ fields: ["id", "title"] });
         style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
       >
         {
-          response2.contents.map((content: any) => (
+          themes.contents.map((content: any) => (
             <div>
               <a
-                href="https://hagukumu.develop999.net//services/?category=feel-free"
+                href={"/services/?category=" + content.slug}
                 class="p-top-block3__label1"
               >
-                まずは気軽に
+                {content.name}
               </a>
             </div>
           ))
@@ -840,12 +779,7 @@ const response2 = await getBlogs2({ fields: ["id", "title"] });
           class="p-top-block3__button1 js-fade-in-scroll-li"
           style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
         >
-          <a
-            href="https://hagukumu.develop999.net/services"
-            class="c-button -primary -fix"
-          >
-            サービス 一覧
-          </a>
+          <a href="/services" class="c-button -primary -fix"> サービス 一覧</a>
         </p>
       </div>
     </div>
@@ -873,171 +807,41 @@ const response2 = await getBlogs2({ fields: ["id", "title"] });
         </div>
         <div class="p-top-block4__list1-wrapper js-fade-in-scroll-ul">
           <ul class="p-story-body__list">
-            <li
-              class="p-story js-fade-in-scroll-li"
-              style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-            >
-              <a
-                class="p-story__text"
-                href="https://hagukumu.develop999.net/stories/567/"
-                >社員の“でき”は、リーダーの“でき”？</a
-              >
-              <ul class="p-story__tag-list">
-                <li>
-                  <a
-                    class="c-tag"
-                    href="https://hagukumu.develop999.net//stories/?category=column"
-                    >小寺毅のコラム</a
-                  >
+            {
+              response.contents.slice(0, 6).map((content: any) => (
+                <li
+                  class="p-story js-fade-in-scroll-li"
+                  style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+                >
+                  <a class="p-story__text" href={"/stories/" + content.id}>
+                    {content.title}
+                  </a>
+                  <ul class="p-story__tag-list">
+                    <li>
+                      <a
+                        class="c-tag"
+                        href={"/stories/?category=" + content.category_slug}
+                      >
+                        {content.category}
+                      </a>
+                    </li>
+                  </ul>
+                  <figure class="p-story__media">
+                    <img
+                      class="p-story__image"
+                      src={content.main_img.url}
+                      alt=""
+                    />
+                  </figure>
                 </li>
-              </ul>
-              <figure class="p-story__media">
-                <img
-                  class="p-story__image"
-                  src="https://hagukumu.develop999.net/wp-content/uploads/2022/10/column-01-556x340.png"
-                  alt=""
-                />
-              </figure>
-            </li>
-            <li
-              class="p-story js-fade-in-scroll-li"
-              style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-            >
-              <a
-                class="p-story__text"
-                href="https://hagukumu.develop999.net/stories/560/"
-                >『LIFE SHIFT 2』を片手に、自分の人生戦略を問い直す</a
-              >
-              <ul class="p-story__tag-list">
-                <li>
-                  <a
-                    class="c-tag"
-                    href="https://hagukumu.develop999.net//stories/?category=work-design"
-                    >Work Design News</a
-                  >
-                </li>
-              </ul>
-              <figure class="p-story__media">
-                <img
-                  class="p-story__image"
-                  src="https://hagukumu.develop999.net/wp-content/uploads/2022/10/スクリーンショット-2022-10-18-23.39.39-556x340.png"
-                  alt=""
-                />
-              </figure>
-            </li>
-            <li
-              class="p-story js-fade-in-scroll-li"
-              style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-            >
-              <a
-                class="p-story__text"
-                href="https://hagukumu.develop999.net/stories/522/"
-                >いい会社は「遠きをはかる」</a
-              >
-              <ul class="p-story__tag-list">
-                <li>
-                  <a
-                    class="c-tag"
-                    href="https://hagukumu.develop999.net//stories/?category=work-design"
-                    >Work Design News</a
-                  >
-                </li>
-              </ul>
-              <figure class="p-story__media">
-                <img
-                  class="p-story__image"
-                  src="https://hagukumu.develop999.net/wp-content/uploads/2022/10/wd-02-556x340.png"
-                  alt=""
-                />
-              </figure>
-            </li>
-            <li
-              class="p-story js-fade-in-scroll-li"
-              style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-            >
-              <a
-                class="p-story__text"
-                href="https://hagukumu.develop999.net/stories/559/"
-                >ワークシートダウンロード</a
-              >
-              <ul class="p-story__tag-list">
-                <li>
-                  <a
-                    class="c-tag"
-                    href="https://hagukumu.develop999.net//stories/?category=work-design"
-                    >Work Design News</a
-                  >
-                </li>
-              </ul>
-              <figure class="p-story__media">
-                <img
-                  class="p-story__image"
-                  src="https://hagukumu.develop999.net/wp-content/uploads/2022/10/スクリーンショット-2022-10-19-0.02.36-556x340.png"
-                  alt=""
-                />
-              </figure>
-            </li>
-            <li
-              class="p-story js-fade-in-scroll-li"
-              style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-            >
-              <a
-                class="p-story__text"
-                href="https://hagukumu.develop999.net/stories/554/"
-                >「はぐくむ四季の森」の現場から</a
-              >
-              <ul class="p-story__tag-list">
-                <li>
-                  <a
-                    class="c-tag"
-                    href="https://hagukumu.develop999.net//stories/?category=self-design"
-                    >Self Design News</a
-                  >
-                </li>
-              </ul>
-              <figure class="p-story__media">
-                <img
-                  class="p-story__image"
-                  src="https://hagukumu.develop999.net/wp-content/uploads/2022/10/⑤-556x340.jpeg"
-                  alt=""
-                />
-              </figure>
-            </li>
-            <li
-              class="p-story js-fade-in-scroll-li"
-              style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-            >
-              <a
-                class="p-story__text"
-                href="https://hagukumu.develop999.net/stories/498/"
-                >僕とはぐくむの、ともに生きる物語</a
-              >
-              <ul class="p-story__tag-list">
-                <li>
-                  <a
-                    class="c-tag"
-                    href="https://hagukumu.develop999.net//stories/?category=stories-of-people"
-                    >はぐくむに関わる人の物語</a
-                  >
-                </li>
-              </ul>
-              <figure class="p-story__media">
-                <img
-                  class="p-story__image"
-                  src="https://hagukumu.develop999.net/wp-content/uploads/2022/10/Copy-of-たけちん-556x340.jpg"
-                  alt=""
-                />
-              </figure>
-            </li>
+              ))
+            }
           </ul>
           <p
             class="p-top-block4__button1 js-fade-in-scroll-li"
             style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
           >
-            <a
-              href="https://hagukumu.develop999.net/stories"
-              class="c-button -primary -fix"
-            >
+            <a href="/stories" class="c-button -primary -fix">
               ストーリー 一覧
             </a>
           </p>

@@ -36,23 +36,27 @@ const compass = await getCompassDetail(compassId as string);
       <div class="p-about-block7__editor1">
         <div class="p-about-block7__item p-about-block7__speaker">
           <h2 class="p-about-block7__speaker-heading">
-            {compass.speaker.heading}
+            <Fragment set:html={compass.speaker.heading} />
           </h2>
           <p class="p-about-block7__speaker-text">
-            {compass.speaker.text}
+            <Fragment set:html={compass.speaker.text} />
           </p>
         </div>
         {
           compass.dialog.map((content: any) => (
             <div class="p-about-block7__item">
-              <h2>{content.name}</h2>
-              <p>{content.text}</p>
+              <h2>
+                <Fragment set:html={content.name} />
+              </h2>
+              <p>
+                <Fragment set:html={content.text} />
+              </p>
             </div>
           ))
         }
       </div>
       <p class="p-about-block7__text1">
-        {compass.description}
+        <Fragment set:html={compass.description} />
       </p>
     </div>
   </div>
@@ -67,18 +71,26 @@ const compass = await getCompassDetail(compassId as string);
       </div>
       <ul class="p-about-block3__list1">
         {
-          compassList.contents.map((content: any) => (
-            <li class="">
-              <a href={"/about/" + content.id} class="p-about-block3__unit1">
-                <div class="p-about-block3__unit1__title1-wrapper">
-                  <p class="p-about-block3__unit1__title1">{content.title}</p>
-                </div>
-                <p class="p-about-block3__unit1__text1">
-                  {content.update_date} Update
-                </p>
-              </a>
-            </li>
-          ))
+          compassList.contents
+            .filter((content: any) => {
+              if (content.id != compassId) {
+                return true;
+              }
+            })
+            .map((content: any) => (
+              <li class="">
+                <a href={"/about/" + content.id} class="p-about-block3__unit1">
+                  <div class="p-about-block3__unit1__title1-wrapper">
+                    <p class="p-about-block3__unit1__title1">
+                      <Fragment set:html={content.main_copy} />
+                    </p>
+                  </div>
+                  <p class="p-about-block3__unit1__text1">
+                    {content.update_date} Update
+                  </p>
+                </a>
+              </li>
+            ))
         }
       </ul>
     </div>

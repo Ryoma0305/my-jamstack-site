@@ -2,10 +2,12 @@
 import Layout from "../../layouts/Layout.astro";
 
 //microCMS呼び出し
-import { getBlogs } from "../../library/microcms";
 import { getBlogs2 } from "../../library/wpcms";
-const response = await getBlogs({ fields: ["id", "title"] });
-const response2 = await getBlogs2({ fields: ["id", "title"] });
+import { getCategories } from "../../library/wpcms-service-category";
+import { getThemes } from "../../library/wpcms-service-theme";
+const response = await getBlogs2({ fields: ["id", "title"] });
+const categories = await getCategories({ fields: ["id", "title"] });
+const themes = await getThemes({ fields: ["id", "title"] });
 ---
 
 <Layout title="My first blog with Astro">
@@ -32,281 +34,49 @@ const response2 = await getBlogs2({ fields: ["id", "title"] });
                 />
                 <span class="c-radio-tab__label">All</span>
               </label>
-              <label class="c-radio-tab">
-                <input
-                  class="c-radio-tab__input"
-                  type="radio"
-                  name="theme"
-                  value="self-design"
-                />
-                <span class="c-radio-tab__label">Self Design</span>
-              </label>
-              <label class="c-radio-tab">
-                <input
-                  class="c-radio-tab__input"
-                  type="radio"
-                  name="theme"
-                  value="work-design"
-                />
-                <span class="c-radio-tab__label">Work Design</span>
-              </label>
-              <label class="c-radio-tab">
-                <input
-                  class="c-radio-tab__input"
-                  type="radio"
-                  name="theme"
-                  value="town-design"
-                />
-                <span class="c-radio-tab__label">Town Design</span>
-              </label>
+              {
+                categories.contents.map((content: any) => (
+                  <label class="c-radio-tab">
+                    <input
+                      class="c-radio-tab__input"
+                      type="radio"
+                      name="theme"
+                      value={content.slug}
+                    />
+                    <span class="c-radio-tab__label">{content.name}</span>
+                  </label>
+                ))
+              }
             </div>
 
             <div
               class="p-service-header__tag-list u-hidden-md-down"
               id="js_category_pc"
             >
-              <label class="c-radio-tag">
-                <input
-                  class="c-radio-tag__input"
-                  type="radio"
-                  name="category"
-                  value="feel-free"
-                />
-                <span class="c-radio-tag__label">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12.2005 3.80665C11.9405 3.54665 11.5205 3.54665 11.2605 3.80665L8.00047 7.05998L4.74047 3.79998C4.48047 3.53998 4.06047 3.53998 3.80047 3.79998C3.54047 4.05998 3.54047 4.47998 3.80047 4.73998L7.06047 7.99998L3.80047 11.26C3.54047 11.52 3.54047 11.94 3.80047 12.2C4.06047 12.46 4.48047 12.46 4.74047 12.2L8.00047 8.93998L11.2605 12.2C11.5205 12.46 11.9405 12.46 12.2005 12.2C12.4605 11.94 12.4605 11.52 12.2005 11.26L8.94047 7.99998L12.2005 4.73998C12.4538 4.48665 12.4538 4.05998 12.2005 3.80665Z"
-                    ></path>
-                  </svg>
-                  <span class="c-radio-tag__remove">削除</span>
-                  まずは気軽に
-                </span>
-              </label>
-              <label class="c-radio-tag">
-                <input
-                  class="c-radio-tag__input"
-                  type="radio"
-                  name="category"
-                  value="dialogue"
-                />
-                <span class="c-radio-tag__label">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12.2005 3.80665C11.9405 3.54665 11.5205 3.54665 11.2605 3.80665L8.00047 7.05998L4.74047 3.79998C4.48047 3.53998 4.06047 3.53998 3.80047 3.79998C3.54047 4.05998 3.54047 4.47998 3.80047 4.73998L7.06047 7.99998L3.80047 11.26C3.54047 11.52 3.54047 11.94 3.80047 12.2C4.06047 12.46 4.48047 12.46 4.74047 12.2L8.00047 8.93998L11.2605 12.2C11.5205 12.46 11.9405 12.46 12.2005 12.2C12.4605 11.94 12.4605 11.52 12.2005 11.26L8.94047 7.99998L12.2005 4.73998C12.4538 4.48665 12.4538 4.05998 12.2005 3.80665Z"
-                    ></path>
-                  </svg>
-                  <span class="c-radio-tag__remove">削除</span>
-                  対話を学ぶ
-                </span>
-              </label>
-              <label class="c-radio-tag">
-                <input
-                  class="c-radio-tag__input"
-                  type="radio"
-                  name="category"
-                  value="coaching"
-                />
-                <span class="c-radio-tag__label">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12.2005 3.80665C11.9405 3.54665 11.5205 3.54665 11.2605 3.80665L8.00047 7.05998L4.74047 3.79998C4.48047 3.53998 4.06047 3.53998 3.80047 3.79998C3.54047 4.05998 3.54047 4.47998 3.80047 4.73998L7.06047 7.99998L3.80047 11.26C3.54047 11.52 3.54047 11.94 3.80047 12.2C4.06047 12.46 4.48047 12.46 4.74047 12.2L8.00047 8.93998L11.2605 12.2C11.5205 12.46 11.9405 12.46 12.2005 12.2C12.4605 11.94 12.4605 11.52 12.2005 11.26L8.94047 7.99998L12.2005 4.73998C12.4538 4.48665 12.4538 4.05998 12.2005 3.80665Z"
-                    ></path>
-                  </svg>
-                  <span class="c-radio-tag__remove">削除</span>
-                  はじめてのコーチング
-                </span>
-              </label>
-              <label class="c-radio-tag">
-                <input
-                  class="c-radio-tag__input"
-                  type="radio"
-                  name="category"
-                  value="yourself"
-                />
-                <span class="c-radio-tag__label">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12.2005 3.80665C11.9405 3.54665 11.5205 3.54665 11.2605 3.80665L8.00047 7.05998L4.74047 3.79998C4.48047 3.53998 4.06047 3.53998 3.80047 3.79998C3.54047 4.05998 3.54047 4.47998 3.80047 4.73998L7.06047 7.99998L3.80047 11.26C3.54047 11.52 3.54047 11.94 3.80047 12.2C4.06047 12.46 4.48047 12.46 4.74047 12.2L8.00047 8.93998L11.2605 12.2C11.5205 12.46 11.9405 12.46 12.2005 12.2C12.4605 11.94 12.4605 11.52 12.2005 11.26L8.94047 7.99998L12.2005 4.73998C12.4538 4.48665 12.4538 4.05998 12.2005 3.80665Z"
-                    ></path>
-                  </svg>
-                  <span class="c-radio-tag__remove">削除</span>
-                  自分と向き合う
-                </span>
-              </label>
-              <label class="c-radio-tag">
-                <input
-                  class="c-radio-tag__input"
-                  type="radio"
-                  name="category"
-                  value="encounters"
-                />
-                <span class="c-radio-tag__label">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12.2005 3.80665C11.9405 3.54665 11.5205 3.54665 11.2605 3.80665L8.00047 7.05998L4.74047 3.79998C4.48047 3.53998 4.06047 3.53998 3.80047 3.79998C3.54047 4.05998 3.54047 4.47998 3.80047 4.73998L7.06047 7.99998L3.80047 11.26C3.54047 11.52 3.54047 11.94 3.80047 12.2C4.06047 12.46 4.48047 12.46 4.74047 12.2L8.00047 8.93998L11.2605 12.2C11.5205 12.46 11.9405 12.46 12.2005 12.2C12.4605 11.94 12.4605 11.52 12.2005 11.26L8.94047 7.99998L12.2005 4.73998C12.4538 4.48665 12.4538 4.05998 12.2005 3.80665Z"
-                    ></path>
-                  </svg>
-                  <span class="c-radio-tag__remove">削除</span>
-                  人生を変える出会い
-                </span>
-              </label>
-              <label class="c-radio-tag">
-                <input
-                  class="c-radio-tag__input"
-                  type="radio"
-                  name="category"
-                  value="life-shift"
-                />
-                <span class="c-radio-tag__label">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12.2005 3.80665C11.9405 3.54665 11.5205 3.54665 11.2605 3.80665L8.00047 7.05998L4.74047 3.79998C4.48047 3.53998 4.06047 3.53998 3.80047 3.79998C3.54047 4.05998 3.54047 4.47998 3.80047 4.73998L7.06047 7.99998L3.80047 11.26C3.54047 11.52 3.54047 11.94 3.80047 12.2C4.06047 12.46 4.48047 12.46 4.74047 12.2L8.00047 8.93998L11.2605 12.2C11.5205 12.46 11.9405 12.46 12.2005 12.2C12.4605 11.94 12.4605 11.52 12.2005 11.26L8.94047 7.99998L12.2005 4.73998C12.4538 4.48665 12.4538 4.05998 12.2005 3.80665Z"
-                    ></path>
-                  </svg>
-                  <span class="c-radio-tag__remove">削除</span>
-                  LIFE SHIFT
-                </span>
-              </label>
-              <label class="c-radio-tag">
-                <input
-                  class="c-radio-tag__input"
-                  type="radio"
-                  name="category"
-                  value="new-way-of-living"
-                />
-                <span class="c-radio-tag__label">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12.2005 3.80665C11.9405 3.54665 11.5205 3.54665 11.2605 3.80665L8.00047 7.05998L4.74047 3.79998C4.48047 3.53998 4.06047 3.53998 3.80047 3.79998C3.54047 4.05998 3.54047 4.47998 3.80047 4.73998L7.06047 7.99998L3.80047 11.26C3.54047 11.52 3.54047 11.94 3.80047 12.2C4.06047 12.46 4.48047 12.46 4.74047 12.2L8.00047 8.93998L11.2605 12.2C11.5205 12.46 11.9405 12.46 12.2005 12.2C12.4605 11.94 12.4605 11.52 12.2005 11.26L8.94047 7.99998L12.2005 4.73998C12.4538 4.48665 12.4538 4.05998 12.2005 3.80665Z"
-                    ></path>
-                  </svg>
-                  <span class="c-radio-tag__remove">削除</span>
-                  新しい暮らし方
-                </span>
-              </label>
-              <label class="c-radio-tag">
-                <input
-                  class="c-radio-tag__input"
-                  type="radio"
-                  name="category"
-                  value="community"
-                />
-                <span class="c-radio-tag__label">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12.2005 3.80665C11.9405 3.54665 11.5205 3.54665 11.2605 3.80665L8.00047 7.05998L4.74047 3.79998C4.48047 3.53998 4.06047 3.53998 3.80047 3.79998C3.54047 4.05998 3.54047 4.47998 3.80047 4.73998L7.06047 7.99998L3.80047 11.26C3.54047 11.52 3.54047 11.94 3.80047 12.2C4.06047 12.46 4.48047 12.46 4.74047 12.2L8.00047 8.93998L11.2605 12.2C11.5205 12.46 11.9405 12.46 12.2005 12.2C12.4605 11.94 12.4605 11.52 12.2005 11.26L8.94047 7.99998L12.2005 4.73998C12.4538 4.48665 12.4538 4.05998 12.2005 3.80665Z"
-                    ></path>
-                  </svg>
-                  <span class="c-radio-tag__remove">削除</span>
-                  まちづくり・コミュニティー
-                </span>
-              </label>
-              <label class="c-radio-tag">
-                <input
-                  class="c-radio-tag__input"
-                  type="radio"
-                  name="category"
-                  value="in-nature"
-                />
-                <span class="c-radio-tag__label">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12.2005 3.80665C11.9405 3.54665 11.5205 3.54665 11.2605 3.80665L8.00047 7.05998L4.74047 3.79998C4.48047 3.53998 4.06047 3.53998 3.80047 3.79998C3.54047 4.05998 3.54047 4.47998 3.80047 4.73998L7.06047 7.99998L3.80047 11.26C3.54047 11.52 3.54047 11.94 3.80047 12.2C4.06047 12.46 4.48047 12.46 4.74047 12.2L8.00047 8.93998L11.2605 12.2C11.5205 12.46 11.9405 12.46 12.2005 12.2C12.4605 11.94 12.4605 11.52 12.2005 11.26L8.94047 7.99998L12.2005 4.73998C12.4538 4.48665 12.4538 4.05998 12.2005 3.80665Z"
-                    ></path>
-                  </svg>
-                  <span class="c-radio-tag__remove">削除</span>
-                  自然に包まれる時間
-                </span>
-              </label>
-              <label class="c-radio-tag">
-                <input
-                  class="c-radio-tag__input"
-                  type="radio"
-                  name="category"
-                  value="change-the-atmosphere"
-                />
-                <span class="c-radio-tag__label">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12.2005 3.80665C11.9405 3.54665 11.5205 3.54665 11.2605 3.80665L8.00047 7.05998L4.74047 3.79998C4.48047 3.53998 4.06047 3.53998 3.80047 3.79998C3.54047 4.05998 3.54047 4.47998 3.80047 4.73998L7.06047 7.99998L3.80047 11.26C3.54047 11.52 3.54047 11.94 3.80047 12.2C4.06047 12.46 4.48047 12.46 4.74047 12.2L8.00047 8.93998L11.2605 12.2C11.5205 12.46 11.9405 12.46 12.2005 12.2C12.4605 11.94 12.4605 11.52 12.2005 11.26L8.94047 7.99998L12.2005 4.73998C12.4538 4.48665 12.4538 4.05998 12.2005 3.80665Z"
-                    ></path>
-                  </svg>
-                  <span class="c-radio-tag__remove">削除</span>
-                  会社の空気を変えたい
-                </span>
-              </label>
-              <label class="c-radio-tag">
-                <input
-                  class="c-radio-tag__input"
-                  type="radio"
-                  name="category"
-                  value="daita_higashimatsubara"
-                />
-                <span class="c-radio-tag__label">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12.2005 3.80665C11.9405 3.54665 11.5205 3.54665 11.2605 3.80665L8.00047 7.05998L4.74047 3.79998C4.48047 3.53998 4.06047 3.53998 3.80047 3.79998C3.54047 4.05998 3.54047 4.47998 3.80047 4.73998L7.06047 7.99998L3.80047 11.26C3.54047 11.52 3.54047 11.94 3.80047 12.2C4.06047 12.46 4.48047 12.46 4.74047 12.2L8.00047 8.93998L11.2605 12.2C11.5205 12.46 11.9405 12.46 12.2005 12.2C12.4605 11.94 12.4605 11.52 12.2005 11.26L8.94047 7.99998L12.2005 4.73998C12.4538 4.48665 12.4538 4.05998 12.2005 3.80665Z"
-                    ></path>
-                  </svg>
-                  <span class="c-radio-tag__remove">削除</span>
-                  代田・東松原
-                </span>
-              </label>
+              {
+                themes.contents.map((content: any) => (
+                  <label class="c-radio-tag">
+                    <input
+                      class="c-radio-tag__input"
+                      type="radio"
+                      name="category"
+                      value={content.slug}
+                    />
+                    <span class="c-radio-tag__label">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M12.2005 3.80665C11.9405 3.54665 11.5205 3.54665 11.2605 3.80665L8.00047 7.05998L4.74047 3.79998C4.48047 3.53998 4.06047 3.53998 3.80047 3.79998C3.54047 4.05998 3.54047 4.47998 3.80047 4.73998L7.06047 7.99998L3.80047 11.26C3.54047 11.52 3.54047 11.94 3.80047 12.2C4.06047 12.46 4.48047 12.46 4.74047 12.2L8.00047 8.93998L11.2605 12.2C11.5205 12.46 11.9405 12.46 12.2005 12.2C12.4605 11.94 12.4605 11.52 12.2005 11.26L8.94047 7.99998L12.2005 4.73998C12.4538 4.48665 12.4538 4.05998 12.2005 3.80665Z" />
+                      </svg>
+                      <span class="c-radio-tag__remove">削除</span>
+                      {content.name}
+                    </span>
+                  </label>
+                ))
+              }
             </div>
           </div>
         </form>
@@ -703,35 +473,225 @@ const response2 = await getBlogs2({ fields: ["id", "title"] });
       <div class="p-service-body">
         <div class="p-service-body__contents">
           {
-            response2.contents.map((content: any) => (
-              <section
-                class="p-service__item js-fade-in-scroll"
-                style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-              >
-                <div class="p-service__text-block">
-                  <h3 class="p-service__heading">
-                    <a class="p-service__link" href={"/services/" + content.id}>
-                      {content.title}
-                    </a>
-                  </h3>
-                  <p class="p-service__text">{content.lead_text}</p>
+            response.contents
+              .filter((content: any) => {
+                if (content.id != 367) {
+                  return true;
+                }
+              })
+              .map((content: any) => (
+                <section
+                  class="p-service__item js-fade-in-scroll"
+                  style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+                >
+                  <div class="p-service__text-block">
+                    <h3 class="p-service__heading">
+                      <a
+                        class="p-service__link"
+                        href={"/services/" + content.id}
+                      >
+                        {content.title}
+                      </a>
+                    </h3>
+                    <p class="p-service__text">{content.lead_text}</p>
 
-                  <ul class="p-service__tag-list">
-                    {content.id}
-                    <li class="p-service__tag-item" />
-                  </ul>
-                </div>
-                <figure class="p-service__media">
-                  <img
-                    class="p-service__image"
-                    src="https://hagukumu.develop999.net/wp-content/uploads/2022/09/illust-2.png"
-                    alt=""
-                  />
-                </figure>
-              </section>
-            ))
+                    <ul class="p-service__tag-list">
+                      {content.service_tag.map((s: any) => (
+                        <li class="p-service__tag-item">{s.name}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <figure class="p-service__media">
+                    <img
+                      class="p-service__image"
+                      src="https://hagukumu.develop999.net/wp-content/uploads/2022/09/illust-2.png"
+                      alt=""
+                    />
+                  </figure>
+                </section>
+              ))
+          }
+          {
+            response.contents
+              .filter((content: any) => {
+                if (content.id == 367) {
+                  return true;
+                }
+              })
+              .map((content: any) => (
+                <section
+                  class="p-service__item js-fade-in-scroll"
+                  style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+                >
+                  <div class="p-service__text-block">
+                    <h3 class="p-service__heading">
+                      <a class="p-service__link" href="/forbiz/">
+                        {content.title}
+                      </a>
+                    </h3>
+                    <p class="p-service__text">{content.lead_text}</p>
+
+                    <ul class="p-service__tag-list">
+                      {content.service_tag.map((s: any) => (
+                        <li class="p-service__tag-item">{s.name}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <figure class="p-service__media">
+                    <img
+                      class="p-service__image"
+                      src="https://hagukumu.develop999.net/wp-content/uploads/2022/09/illust-2.png"
+                      alt=""
+                    />
+                  </figure>
+                </section>
+              ))
           }
         </div>
+      </div>
+    </section>
+    <section
+      class="l-contents__wrapper p-service-hagukumu u-hidden-md-down js-fade-in-scroll"
+      style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+    >
+      <div class="p-service-hagukumu__figure-group">
+        <figure>
+          <picture>
+            <source
+              srcset="https://hagukumu.develop999.net/wp-content/themes/hagukumu.co.jp/assets/static/images/service/img_hagukumu@2x.png 2x"
+            />
+            <img
+              src="https://hagukumu.develop999.net/wp-content/themes/hagukumu.co.jp/assets/static/images/service/img_hagukumu.png"
+              alt="3つの三角形が並び、それぞれが少しずつ重なり合っている図：左下Self Design、右下Work Design、中央上Town Design"
+              width="352"
+              height="333"
+              loading="lazy"
+            />
+          </picture>
+        </figure>
+        <p class="p-service-hagukumu__forest">
+          <a class="c-button-with-icon -self-design" href="/about/#approach">
+            <span class="c-button-with-icon__circle">
+              <svg
+                width="19"
+                height="18"
+                viewBox="0 0 19 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
+                  fill="currentColor"></path>
+              </svg>
+            </span>
+            はぐくむの３つの事業について
+          </a>
+        </p>
+      </div>
+      <div class="p-service-hagukumu__text-group">
+        <section class="p-service-hagukumu__design-group">
+          <h2 class="p-service-hagukumu__heading -self-design">
+            自己をはぐくむ Self Design
+          </h2>
+          <ul class="p-service-hagukumu__list">
+            {
+              response.contents
+                .filter((content: any) => {
+                  if (content.service_category != false) {
+                    return content.service_category[0].term_id == 27;
+                  }
+                })
+                .map((content: any) => (
+                  <li>
+                    <a
+                      class="c-button-with-icon -self-design"
+                      href={"/services/" + content.id}
+                    >
+                      <span class="c-button-with-icon__circle">
+                        <svg
+                          width="19"
+                          height="18"
+                          viewBox="0 0 19 18"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </span>
+                      {content.title}
+                    </a>
+                  </li>
+                ))
+            }
+          </ul>
+        </section>
+        <section class="p-service-hagukumu__design-group">
+          <h2 class="p-service-hagukumu__heading -work-design">
+            会社をはぐくむ Work Design
+          </h2>
+          <ul class="p-service-hagukumu__list">
+            <li>
+              <a class="c-button-with-icon -work-design" href="/forbiz">
+                <span class="c-button-with-icon__circle">
+                  <svg
+                    width="19"
+                    height="18"
+                    viewBox="0 0 19 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
+                      fill="currentColor"></path>
+                  </svg>
+                </span>
+                森のような組織をはぐくむセッション
+              </a>
+            </li>
+          </ul>
+        </section>
+        <section class="p-service-hagukumu__design-group">
+          <h2 class="p-service-hagukumu__heading -town-design">
+            街をはぐくむ Town Design
+          </h2>
+          <ul class="p-service-hagukumu__list">
+            {
+              response.contents
+                .filter((content: any) => {
+                  if (content.service_category != false) {
+                    return content.service_category[0].term_id == 25;
+                  }
+                })
+                .map((content: any) => (
+                  <li>
+                    <a
+                      class="c-button-with-icon -self-design"
+                      href={"/services/" + content.id}
+                    >
+                      <span class="c-button-with-icon__circle">
+                        <svg
+                          width="19"
+                          height="18"
+                          viewBox="0 0 19 18"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </span>
+                      {content.title}
+                    </a>
+                  </li>
+                ))
+            }
+          </ul>
+        </section>
       </div>
     </section>
   </article>

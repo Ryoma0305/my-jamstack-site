@@ -1,13 +1,13 @@
 //型定義
 
 //APIの呼び出し
-export const getBlogs2 = async () => {
+export const getStoryPosts = async () => {
   //   return await client.get<BlogResponse>({ endpoint: "blogs", queries });
   const data = await fetchAPI("", {});
   return { contents: data };
 };
 
-export const getBlogDetail2 = async (contentId: string) => {
+export const getStoryPostDetail = async (contentId: string) => {
   const data = await fetchAPI("", {});
   return data.filter((item: any) => {
     return item.id == contentId;
@@ -26,6 +26,7 @@ async function fetchAPI(query, { variables } = {}) {
   );
 
   const json = await res.json();
+  console.log(json);
   return json.map((item: any) => {
     return {
       id: item.ID,
@@ -36,6 +37,7 @@ async function fetchAPI(query, { variables } = {}) {
       title: item.title,
       content: item.content,
       category: item.category,
+      category_slug: item.category_slug,
       main_img: item.main_img,
       thumbnail_img: item.thumbnail_img,
     };

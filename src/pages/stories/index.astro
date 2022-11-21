@@ -1,9 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 
-import { getBlogs2 } from "../../library/wpcms-stories";
-import { getCategories } from "../../library/wpcms-stories-categories";
-const response2 = await getBlogs2({ fields: ["id", "title"] });
+import { getStoryPosts } from "../../library/wpcms-stories";
+import { getCategories } from "../../library/wpcms-story-category";
+const response2 = await getStoryPosts({ fields: ["id", "title"] });
 const categories = await getCategories({ fields: ["id", "title"] });
 ---
 
@@ -206,7 +206,10 @@ const categories = await getCategories({ fields: ["id", "title"] });
                 </a>
                 <ul class="p-story__tag-list">
                   <li>
-                    <a class="c-tag" href="#">
+                    <a
+                      class="c-tag"
+                      href={"/stories/?category=" + content.category_slug}
+                    >
                       {content.category}
                     </a>
                   </li>

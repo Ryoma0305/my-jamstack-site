@@ -18,7 +18,7 @@ export type BlogResponse = {
 //APIの呼び出し
 export const getBlogs2 = async () => {
   const data = await fetchAPI("", {});
-  //   console.log(data);
+  // console.log(data);
   return { contents: data };
 };
 
@@ -48,7 +48,7 @@ async function fetchAPI(query, { variables } = {}) {
     if (!item.service_tag) {
       item.service_tag = [];
     }
-    // console.log(item.service_tag);
+    // console.log(item.service_category);
     return {
       id: item.ID,
       createdAt: item.date,
@@ -59,6 +59,8 @@ async function fetchAPI(query, { variables } = {}) {
       lead_text: item.lead_text,
       title: item.title,
       content: item.content,
+      service_category: item.service_category ?? [],
+      service_theme: item.service_theme ?? [],
       service_tag: item.service_tag ?? [],
       main_img: item.main_img,
       og_img: item.og_img,

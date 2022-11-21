@@ -66,16 +66,16 @@ const service = await getBlogDetail2(serviceId as string);
             <div class="l-contents__wrapper">
               <div class="p-service-detail-schedule">
                 <p class="p-service-detail-schedule__highlight">
-                  {content.event_title}
+                  <Fragment set:html={content.event_title} />
                 </p>
                 <dl class="p-service-detail-schedule__list">
                   {content.event_list.map((content: any) => (
                     <>
                       <dt class="p-service-detail-schedule__key">
-                        {content.title}
+                        <Fragment set:html={content.title} />
                       </dt>
                       <dd class="p-service-detail-schedule__value">
-                        {content.text}
+                        <Fragment set:html={content.text} />
                       </dd>
                     </>
                   ))}
@@ -169,18 +169,7 @@ const service = await getBlogDetail2(serviceId as string);
       </div>
     </section>
     <div class="l-sticky-footer p-sticky-footer">
-      <a
-        href="https://hagukumu.develop999.net/entry"
-        class="c-button -primary -contained -fix">申し込む</a
-      >
+      <a href="/entry" class="c-button -primary -contained -fix">申し込む</a>
     </div>
   </article>
 </Layout>
-
-<style>
-  main {
-    margin: auto;
-    padding: 1em;
-    max-width: 60ch;
-  }
-</style>

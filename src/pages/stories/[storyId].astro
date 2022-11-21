@@ -1,10 +1,10 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getBlogs2, getBlogDetail2 } from "../../library/wpcms-stories";
+import { getStoryPosts, getStoryPostDetail } from "../../library/wpcms-stories";
 
 // 詳細記事ページの全パスを取得
 export async function getStaticPaths() {
-  const response = await getBlogs2({ fields: ["id"] });
+  const response = await getStoryPosts({ fields: ["id"] });
   return response.contents.map((content: any) => ({
     params: {
       storyId: content.id,
@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 
 //記事の詳細情報を取得
 const { storyId } = Astro.params;
-const story = await getBlogDetail2(storyId as string);
+const story = await getStoryPostDetail(storyId as string);
 ---
 
 <Layout title="My first blog with Astro">
@@ -27,16 +27,20 @@ const story = await getBlogDetail2(storyId as string);
         </h1>
         <ul class="p-post-header__tag-list">
           <li class="p-post-header__tag-item">
-            <a
-              class="c-tag"
-              href="https://hagukumu.develop999.net//stories/?category=column"
+            <a class="c-tag" href={"/stories/?category=" + story.category_slug}
               >{story.category}</a
             >
           </li>
         </ul>
       </header>
       <div class="p-post-body">
-        {story.content}
+        <figure class="p-post-body__main-image">
+          <img
+            src="http://practicearimuraryomacom.local/wp-content/uploads/2022/10/column-01.png"
+            alt=""
+          />
+        </figure>
+        <Fragment set:html={story.content} />
       </div>
     </div>
     <div class="l-contents__wrapper c-paging">
