@@ -2,7 +2,10 @@
 import Layout from "../../layouts/Layout.astro";
 
 import { getForbiz } from "../../library/wpcms-forbiz";
+import { getForbizPrograms } from "../../library/wpcms-forbiz-programs";
+
 const response = await getForbiz({ fields: ["id", "title"] });
+const programs = await getForbizPrograms({ fields: ["id", "title"] });
 ---
 
 <Layout title="My first blog with Astro">
@@ -124,83 +127,30 @@ const response = await getForbiz({ fields: ["id", "title"] });
         </p>
       </div>
       <ul class="p-forbiz-block2__list1 js-fade-in-scroll-ul">
-        <li
-          class="js-fade-in-scroll-li"
-          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-        >
-          <div class="p-forbiz-block2__unit1">
-            <h3 class="p-forbiz-block2__unit1__title1">チームセッション</h3>
-            <p class="p-forbiz-block2__unit1__text1">
-              豊かな関係性こそが組織の土壌であり、豊かな未来づくりの鍵です。それは、毎月のチームセッションから始めるのがオススメ。普段話し合えない大切なことについてじっくり対話すれば、チームの土壌は確実に変化していきます。
-            </p>
-          </div>
-        </li>
-        <li
-          class="js-fade-in-scroll-li"
-          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-        >
-          <div class="p-forbiz-block2__unit1">
-            <h3 class="p-forbiz-block2__unit1__title1">オフサイトセッション</h3>
-            <p class="p-forbiz-block2__unit1__text1">
-              四半期〜半年毎に自然豊かな場所へ出かけ、とことん語りあったり、身体感覚を伴って感じたことを分かちあう。同じ時間と体験の中で、それぞれが感じる”感覚”や”感情”を重ねることでチームの関係性と共通感覚を育みます。
-            </p>
-          </div>
-        </li>
-        <li
-          class="js-fade-in-scroll-li"
-          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-        >
-          <div class="p-forbiz-block2__unit1">
-            <h3 class="p-forbiz-block2__unit1__title1">
-              森のような組織のはぐくみ方研修
-            </h3>
-            <p class="p-forbiz-block2__unit1__text1">
-              人をパーツのように捉える機械論的な経営ではなく、個性や才能の輝きを尊重する経営。その”答え”や”方法”を教える場ではなく、経営やチームづくりを探求する機会として、様々な情報提供とともに対話する時間を提供します。
-            </p>
-          </div>
-        </li>
-        <li
-          class="js-fade-in-scroll-li"
-          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-        >
-          <div class="p-forbiz-block2__unit1">
-            <h3 class="p-forbiz-block2__unit1__title1">リフレクション研修</h3>
-            <p class="p-forbiz-block2__unit1__text1">
-              自分たちのこれまでの歩みに対して感じていることを遠慮なく本音で語り合えるのが良質なチーム。率直でオープンなやりとりを大切にしながら、自分たちの実りと実らなかったものの両方を収穫として、次なる道筋を展望します。
-            </p>
-          </div>
-        </li>
-        <li
-          class="js-fade-in-scroll-li"
-          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-        >
-          <div class="p-forbiz-block2__unit1">
-            <h3 class="p-forbiz-block2__unit1__title1">1on1コーチング</h3>
-            <p class="p-forbiz-block2__unit1__text1">
-              どこに向かいたいのか、それはなぜなのか。個々の才能が輝き、響きあうチームでは、それぞれの想いを言葉にできるもの。一人ひとりの願いに目を向け、そこから湧きあがる実現したい未来に向けて生きる日々をサポートします。
-            </p>
-          </div>
-        </li>
-        <li
-          class="js-fade-in-scroll-li"
-          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-        >
-          <div class="p-forbiz-block2__unit1">
-            <h3 class="p-forbiz-block2__unit1__title1">
-              はぐくむ式コーチング研修
-            </h3>
-            <p class="p-forbiz-block2__unit1__text1">
-              コミュニケーションの質が、人生の質を左右する。そして、豊かな対話文化は、豊かな関係性の土壌を生み、多くの実りにつながっていく。社内コーチの育成にとどまらず、チーム全体のコミュニケーション文化を育みます。
-            </p>
-          </div>
-        </li>
+        {
+          programs.contents.map((content: any) => (
+            <li
+              class="js-fade-in-scroll-li"
+              style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
+            >
+              <div class="p-forbiz-block2__unit1">
+                <h3 class="p-forbiz-block2__unit1__title1">
+                  {content.program_title}
+                </h3>
+                <p class="p-forbiz-block2__unit1__text1">
+                  {content.program_text}
+                </p>
+              </div>
+            </li>
+          ))
+        }
       </ul>
       <div class="js-fade-in-scroll-ul">
         <p
           class="p-forbiz-block2__banner1 js-fade-in-scroll-li"
           style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
         >
-          <a href="https://hagukumu.develop999.net/stories/559/">
+          <a href="/stories/559/">
             <span class="p-forbiz-block2__banner1__sp1"
               ><img
                 src="https://hagukumu.develop999.net/wp-content/themes/hagukumu.co.jp/assets/static/images/forbiz/block2_banner1_1.png"
@@ -219,7 +169,7 @@ const response = await getForbiz({ fields: ["id", "title"] });
           class="p-forbiz-block2__banner1 js-fade-in-scroll-li"
           style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
         >
-          <a href="https://hagukumu.develop999.net/entry-forbiz">
+          <a href="/entry-forbiz">
             <span class="p-forbiz-block2__banner1__sp1"
               ><img
                 src="https://hagukumu.develop999.net/wp-content/themes/hagukumu.co.jp/assets/static/images/forbiz/block2_banner1_2.png"
