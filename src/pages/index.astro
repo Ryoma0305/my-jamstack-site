@@ -9,7 +9,6 @@ const response = await getStoryPosts();
 const response2 = await getBlogs2();
 const themes = await getThemes();
 const slides = await getTopSlides();
-console.log(slides);
 ---
 
 <Layout title="My first blog with Astro">
@@ -25,27 +24,7 @@ console.log(slides);
         <figure class="p-top-hero__image js-slide-image"></figure>
       </div>
     </div>
-    <div class="p-top-hero__pager js-nav">
-      <button class="p-top-hero__bar" type="button" aria-current="true">
-        <span class="u-visually-hidden">1</span>
-      </button>
-
-      <button class="p-top-hero__bar" type="button" aria-current="false">
-        <span class="u-visually-hidden">2</span>
-      </button>
-
-      <button class="p-top-hero__bar" type="button" aria-current="false">
-        <span class="u-visually-hidden">3</span>
-      </button>
-
-      <button class="p-top-hero__bar" type="button" aria-current="false">
-        <span class="u-visually-hidden">4</span>
-      </button>
-
-      <button class="p-top-hero__bar" type="button" aria-current="false">
-        <span class="u-visually-hidden">5</span>
-      </button>
-    </div>
+    <div class="p-top-hero__pager js-nav"></div>
   </div>
   <section class="p-top-block1 js-fade-in-scroll-ul" data-delay="0.5">
     <div class="p-top-block1__inner1">
@@ -341,98 +320,3 @@ console.log(slides);
     window.homeSlide = slides;
   </script>
 </Layout>
-
-<script>
-  (function () {
-    const slides = {
-      contents: [
-        {
-          comments: [
-            {
-              text: "何でもかんでも利益で<br />\r\n善し悪しを見ないって大事ですよね。",
-            },
-            { text: "数えやすくて目に見えるものの方が安心するけど。" },
-            {
-              text: "目に見えないけど、<br />\r\n根が張っていくことなしに大きくはならないですしね。",
-            },
-            {
-              text: "目に見えないお役立ちがあるから、<br />\r\n利益がついてくるんですね、きっと。",
-            },
-          ],
-          reference: { text: "", url: "/stories/undefined" },
-          image: "",
-        },
-        {
-          comments: [
-            {
-              text: "計画を進めることを優先すると<br />\r\n人の気持ちはスルーされがちですよね。",
-            },
-            {
-              text: "その場の空気感を掴んで対話できないと<br />\r\n心も、進め方も機械的になってしまいますしね。",
-            },
-            {
-              text: "信じて委ねる。<br />\r\n今ここに集中して、起きていることを大切にする。",
-            },
-            {
-              text: "そこには自分の予想を超えた<br />\r\n結果につながっていく喜びがありますね。",
-            },
-          ],
-          reference: { text: "", url: "/stories/undefined" },
-          image: "",
-        },
-        {
-          comments: [
-            { text: "不足＝悪いこととは限らないですよね？" },
-            {
-              text: "80点を取っても、20点の方が<br />\r\n気になってしまったりとか。",
-            },
-            {
-              text: "そういう世界観で生きていると、<br />\r\n自分には才能がないと思い込んでしまうと思うんです。",
-            },
-            {
-              text: "足りないっていう不足や<br />\r\n否定の世界観ではないところへいきたいですね。",
-            },
-          ],
-          reference: { text: "", url: "/stories/undefined" },
-          image: "",
-        },
-        {
-          comments: [
-            {
-              text: "結論ありきの会話を重ねると、<br />\r\nどんどん命の輝きを失ってしまいます。",
-            },
-            {
-              text: "対話は今ここで湧き上がってきたものを<br />\r\n素直に出して重ねていくこと。",
-            },
-            {
-              text: "だから、その人が本当に願ってることを<br />\r\n軸にした生き方ができるんですね。",
-            },
-            { text: "" },
-          ],
-          reference: { text: "", url: "/stories/undefined" },
-          image: "",
-        },
-        {
-          comments: [
-            {
-              text: "会社って、社長や上司のために<br />\r\n心を無にして働く場所ではないですよね。",
-            },
-            {
-              text: "みんな一人ひとりが自分の<br />\r\n人生の物語の主人公ですものね。",
-            },
-            {
-              text: "対話を重ねていくと<br />\r\nメンバーそれぞれの物語が重なっていく。",
-            },
-            {
-              text: "物語を分かち合えると<br />\r\n数字も自分ごとになりますよね。",
-            },
-          ],
-          reference: { text: "", url: "/stories/undefined" },
-          image: "",
-        },
-      ],
-    };
-
-    window.homeSlide = slides;
-  })();
-</script>
