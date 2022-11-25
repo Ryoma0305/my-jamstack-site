@@ -60,29 +60,30 @@ const service = await getBlogDetail2(serviceId as string);
         <h2 class="c-section-header__heading">開催スケジュール</h2>
       </header>
       {
-        service.events[0].map((content: any) => (
-          <>
-            <div class="l-contents__wrapper">
-              <div class="p-service-detail-schedule">
-                <p class="p-service-detail-schedule__highlight">
-                  <Fragment set:html={content.event_title} />
-                </p>
-                <dl class="p-service-detail-schedule__list">
-                  {content.event_list.map((content: any) => (
-                    <>
-                      <dt class="p-service-detail-schedule__key">
-                        <Fragment set:html={content.title} />
-                      </dt>
-                      <dd class="p-service-detail-schedule__value">
-                        <Fragment set:html={content.text} />
-                      </dd>
-                    </>
-                  ))}
-                </dl>
+        service.events &&
+          service.events.map((content: any) => (
+            <>
+              <div class="l-contents__wrapper">
+                <div class="p-service-detail-schedule">
+                  <p class="p-service-detail-schedule__highlight">
+                    <Fragment set:html={content.event_title} />
+                  </p>
+                  <dl class="p-service-detail-schedule__list">
+                    {content.event_list.map((content: any) => (
+                      <>
+                        <dt class="p-service-detail-schedule__key">
+                          <Fragment set:html={content.title} />
+                        </dt>
+                        <dd class="p-service-detail-schedule__value">
+                          <Fragment set:html={content.text} />
+                        </dd>
+                      </>
+                    ))}
+                  </dl>
+                </div>
               </div>
-            </div>
-          </>
-        ))
+            </>
+          ))
       }
     </section>
 
@@ -93,21 +94,22 @@ const service = await getBlogDetail2(serviceId as string);
       <div class="l-contents__wrapper p-gallery">
         <div class="p-gallery__list">
           {
-            service.gallery.map((content: any) => (
-              <>
-                <div class="p-gallery__item">
-                  <a class="js-modal" href="#gallery_1">
+            service.gallery &&
+              service.gallery.map((content: any) => (
+                <>
+                  <div class="p-gallery__item">
+                    <a class="js-modal" href="#gallery_1">
+                      <img src={content.img.url} alt="" />
+                    </a>
+                  </div>
+                  <figure class="mfp-hide" id="gallery_1">
                     <img src={content.img.url} alt="" />
-                  </a>
-                </div>
-                <figure class="mfp-hide" id="gallery_1">
-                  <img src={content.img.url} alt="" />
-                  <figcaption class="p-gallery__caption">
-                    はぐくむ湖畔とオンライン開催を交互に、毎月開催するカンバセーションカフェ
-                  </figcaption>
-                </figure>
-              </>
-            ))
+                    <figcaption class="p-gallery__caption">
+                      はぐくむ湖畔とオンライン開催を交互に、毎月開催するカンバセーションカフェ
+                    </figcaption>
+                  </figure>
+                </>
+              ))
           }
         </div>
       </div>
@@ -116,21 +118,27 @@ const service = await getBlogDetail2(serviceId as string);
       <header class="l-contents__wrapper c-section-header">
         <h2 class="c-section-header__heading">その他のおすすめサービス</h2>
       </header>
+      {
+        /*
       <div class="l-contents__wrapper p-service-detail-recommend">
         {
           response2.contents
             .filter((content: any) => {
-              if (content.service_tag.length == 0) {
+              if (content.service_tag == false) {
+                return false;
+              }
+
+              if (content.id == service.id) {
                 return false;
               }
               if (
-                content.service_tag[0].term_id !=
-                  service.service_tag[0].term_id ||
-                content.id == service.id
+                content.service_tag[0].term_id == service.service_tag[0].term_id
               ) {
-                return false;
+                console.log(content.service_tag[0].term_id);
+                console.log(service.service_tag[0].term_id);
+                console.log("trueです");
+                return true;
               }
-              return true;
             })
             .slice(0, 3)
             .map((content: any) => (
@@ -166,6 +174,8 @@ const service = await getBlogDetail2(serviceId as string);
             ))
         }
       </div>
+      */
+      }
     </section>
     <div class="l-sticky-footer p-sticky-footer">
       <a href="/entry" class="c-button -primary -contained -fix">申し込む</a>

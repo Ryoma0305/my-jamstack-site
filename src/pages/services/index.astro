@@ -449,224 +449,224 @@ const themes = await getThemes({ fields: ["id", "title"] });
             </dialog>
           </div>
         </form>
-        <div class="p-service-body">
-          <div class="p-service-body__contents">
-            {
-              response.contents
-                .filter((content: any) => {
-                  if (content.id != 367) {
-                    return true;
-                  }
-                })
-                .map((content: any) => (
-                  <section class="p-service__item js-fade-in-scroll">
-                    <div class="p-service__text-block">
-                      <h3 class="p-service__heading">
-                        <a
-                          class="p-service__link"
-                          href={"/services/" + content.id}
-                        >
-                          {content.title}
-                        </a>
-                      </h3>
-                      <p class="p-service__text">{content.lead_text}</p>
+      </div>
+      <div class="p-service-body">
+        <div class="p-service-body__contents">
+          {
+            response.contents
+              .filter((content: any) => {
+                if (content.id != 367) {
+                  return true;
+                }
+              })
+              .map((content: any) => (
+                <section class="p-service__item js-fade-in-scroll">
+                  <div class="p-service__text-block">
+                    <h3 class="p-service__heading">
+                      <a
+                        class="p-service__link"
+                        href={"/services/" + content.id}
+                      >
+                        {content.title}
+                      </a>
+                    </h3>
+                    <p class="p-service__text">{content.lead_text}</p>
 
-                      <ul class="p-service__tag-list">
-                        {content.service_tag.map((s: any) => (
-                          <li class="p-service__tag-item">{s.name}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <figure class="p-service__media">
-                      <img
-                        class="p-service__image"
-                        src="https://hagukumu.develop999.net/wp-content/uploads/2022/09/illust-2.png"
-                        alt=""
-                      />
-                    </figure>
-                  </section>
-                ))
-            }
-            {
-              response.contents
-                .filter((content: any) => {
-                  if (content.id == 367) {
-                    return true;
-                  }
-                })
-                .map((content: any) => (
-                  <section class="p-service__item js-fade-in-scroll">
-                    <div class="p-service__text-block">
-                      <h3 class="p-service__heading">
-                        <a class="p-service__link" href="/forbiz/">
-                          {content.title}
-                        </a>
-                      </h3>
-                      <p class="p-service__text">{content.lead_text}</p>
+                    <ul class="p-service__tag-list">
+                      {content.service_tag.map((s: any) => (
+                        <li class="p-service__tag-item">{s.name}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <figure class="p-service__media">
+                    <img
+                      class="p-service__image"
+                      src="https://hagukumu.develop999.net/wp-content/uploads/2022/09/illust-2.png"
+                      alt=""
+                    />
+                  </figure>
+                </section>
+              ))
+          }
+          {
+            response.contents
+              .filter((content: any) => {
+                if (content.id == 367) {
+                  return true;
+                }
+              })
+              .map((content: any) => (
+                <section class="p-service__item js-fade-in-scroll">
+                  <div class="p-service__text-block">
+                    <h3 class="p-service__heading">
+                      <a class="p-service__link" href="/forbiz/">
+                        {content.title}
+                      </a>
+                    </h3>
+                    <p class="p-service__text">{content.lead_text}</p>
 
-                      <ul class="p-service__tag-list">
-                        {content.service_tag.map((s: any) => (
-                          <li class="p-service__tag-item">{s.name}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <figure class="p-service__media">
-                      <img
-                        class="p-service__image"
-                        src="https://hagukumu.develop999.net/wp-content/uploads/2022/09/illust-2.png"
-                        alt=""
-                      />
-                    </figure>
-                  </section>
-                ))
-            }
-          </div>
+                    <ul class="p-service__tag-list">
+                      {content.service_tag.map((s: any) => (
+                        <li class="p-service__tag-item">{s.name}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <figure class="p-service__media">
+                    <img
+                      class="p-service__image"
+                      src="https://hagukumu.develop999.net/wp-content/uploads/2022/09/illust-2.png"
+                      alt=""
+                    />
+                  </figure>
+                </section>
+              ))
+          }
         </div>
       </div>
-      <section
-        class="l-contents__wrapper p-service-hagukumu u-hidden-md-down js-fade-in-scroll"
-      >
-        <div class="p-service-hagukumu__figure-group">
-          <figure>
-            <picture>
-              <source
-                srcset="https://hagukumu.develop999.net/wp-content/themes/hagukumu.co.jp/assets/static/images/service/img_hagukumu@2x.png 2x"
-              />
-              <img
-                src="https://hagukumu.develop999.net/wp-content/themes/hagukumu.co.jp/assets/static/images/service/img_hagukumu.png"
-                alt="3つの三角形が並び、それぞれが少しずつ重なり合っている図：左下Self Design、右下Work Design、中央上Town Design"
-                width="352"
-                height="333"
-                loading="lazy"
-              />
-            </picture>
-          </figure>
-          <p class="p-service-hagukumu__forest">
-            <a class="c-button-with-icon -self-design" href="/about/#approach">
-              <span class="c-button-with-icon__circle">
-                <svg
-                  width="19"
-                  height="18"
-                  viewBox="0 0 19 18"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
-                    fill="currentColor"></path>
-                </svg>
-              </span>
-              はぐくむの３つの事業について
-            </a>
-          </p>
-        </div>
-        <div class="p-service-hagukumu__text-group">
-          <section class="p-service-hagukumu__design-group">
-            <h2 class="p-service-hagukumu__heading -self-design">
-              自己をはぐくむ Self Design
-            </h2>
-            <ul class="p-service-hagukumu__list">
-              {
-                response.contents
-                  .filter((content: any) => {
-                    if (content.service_category != false) {
-                      return content.service_category[0].term_id == 27;
-                    }
-                  })
-                  .map((content: any) => (
-                    <li>
-                      <a
-                        class="c-button-with-icon -self-design"
-                        href={"/services/" + content.id}
-                      >
-                        <span class="c-button-with-icon__circle">
-                          <svg
-                            width="19"
-                            height="18"
-                            viewBox="0 0 19 18"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
-                              fill="currentColor"
-                            />
-                          </svg>
-                        </span>
-                        {content.title}
-                      </a>
-                    </li>
-                  ))
-              }
-            </ul>
-          </section>
-          <section class="p-service-hagukumu__design-group">
-            <h2 class="p-service-hagukumu__heading -work-design">
-              会社をはぐくむ Work Design
-            </h2>
-            <ul class="p-service-hagukumu__list">
-              <li>
-                <a class="c-button-with-icon -work-design" href="/forbiz">
-                  <span class="c-button-with-icon__circle">
-                    <svg
-                      width="19"
-                      height="18"
-                      viewBox="0 0 19 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
+    </section>
+    <section
+      class="l-contents__wrapper p-service-hagukumu u-hidden-md-down js-fade-in-scroll"
+    >
+      <div class="p-service-hagukumu__figure-group">
+        <figure>
+          <picture>
+            <source
+              srcset="https://hagukumu.develop999.net/wp-content/themes/hagukumu.co.jp/assets/static/images/service/img_hagukumu@2x.png 2x"
+            />
+            <img
+              src="https://hagukumu.develop999.net/wp-content/themes/hagukumu.co.jp/assets/static/images/service/img_hagukumu.png"
+              alt="3つの三角形が並び、それぞれが少しずつ重なり合っている図：左下Self Design、右下Work Design、中央上Town Design"
+              width="352"
+              height="333"
+              loading="lazy"
+            />
+          </picture>
+        </figure>
+        <p class="p-service-hagukumu__forest">
+          <a class="c-button-with-icon -self-design" href="/about/#approach">
+            <span class="c-button-with-icon__circle">
+              <svg
+                width="19"
+                height="18"
+                viewBox="0 0 19 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
+                  fill="currentColor"></path>
+              </svg>
+            </span>
+            はぐくむの３つの事業について
+          </a>
+        </p>
+      </div>
+      <div class="p-service-hagukumu__text-group">
+        <section class="p-service-hagukumu__design-group">
+          <h2 class="p-service-hagukumu__heading -self-design">
+            自己をはぐくむ Self Design
+          </h2>
+          <ul class="p-service-hagukumu__list">
+            {
+              response.contents
+                .filter((content: any) => {
+                  if (content.service_category != false) {
+                    return content.service_category[0].term_id == 27;
+                  }
+                })
+                .map((content: any) => (
+                  <li>
+                    <a
+                      class="c-button-with-icon -self-design"
+                      href={"/services/" + content.id}
                     >
-                      <path
-                        d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
-                        fill="currentColor"></path>
-                    </svg>
-                  </span>
-                  森のような組織をはぐくむセッション
-                </a>
-              </li>
-            </ul>
-          </section>
-          <section class="p-service-hagukumu__design-group">
-            <h2 class="p-service-hagukumu__heading -town-design">
-              街をはぐくむ Town Design
-            </h2>
-            <ul class="p-service-hagukumu__list">
-              {
-                response.contents
-                  .filter((content: any) => {
-                    if (content.service_category != false) {
-                      return content.service_category[0].term_id == 25;
-                    }
-                  })
-                  .map((content: any) => (
-                    <li>
-                      <a
-                        class="c-button-with-icon -self-design"
-                        href={"/services/" + content.id}
-                      >
-                        <span class="c-button-with-icon__circle">
-                          <svg
-                            width="19"
-                            height="18"
-                            viewBox="0 0 19 18"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
-                              fill="currentColor"
-                            />
-                          </svg>
-                        </span>
-                        {content.title}
-                      </a>
-                    </li>
-                  ))
-              }
-            </ul>
-          </section>
-        </div>
-      </section>
+                      <span class="c-button-with-icon__circle">
+                        <svg
+                          width="19"
+                          height="18"
+                          viewBox="0 0 19 18"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </span>
+                      {content.title}
+                    </a>
+                  </li>
+                ))
+            }
+          </ul>
+        </section>
+        <section class="p-service-hagukumu__design-group">
+          <h2 class="p-service-hagukumu__heading -work-design">
+            会社をはぐくむ Work Design
+          </h2>
+          <ul class="p-service-hagukumu__list">
+            <li>
+              <a class="c-button-with-icon -work-design" href="/forbiz">
+                <span class="c-button-with-icon__circle">
+                  <svg
+                    width="19"
+                    height="18"
+                    viewBox="0 0 19 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
+                      fill="currentColor"></path>
+                  </svg>
+                </span>
+                森のような組織をはぐくむセッション
+              </a>
+            </li>
+          </ul>
+        </section>
+        <section class="p-service-hagukumu__design-group">
+          <h2 class="p-service-hagukumu__heading -town-design">
+            街をはぐくむ Town Design
+          </h2>
+          <ul class="p-service-hagukumu__list">
+            {
+              response.contents
+                .filter((content: any) => {
+                  if (content.service_category != false) {
+                    return content.service_category[0].term_id == 25;
+                  }
+                })
+                .map((content: any) => (
+                  <li>
+                    <a
+                      class="c-button-with-icon -self-design"
+                      href={"/services/" + content.id}
+                    >
+                      <span class="c-button-with-icon__circle">
+                        <svg
+                          width="19"
+                          height="18"
+                          viewBox="0 0 19 18"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M7.46742 5.03258C7.17492 5.32508 7.17492 5.79758 7.46742 6.09008L10.3774 9.00008L7.46742 11.9101C7.17492 12.2026 7.17492 12.6751 7.46742 12.9676C7.75992 13.2601 8.23242 13.2601 8.52492 12.9676L11.9674 9.52508C12.2599 9.23258 12.2599 8.76008 11.9674 8.46758L8.52492 5.02508C8.23992 4.74008 7.75992 4.74008 7.46742 5.03258Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </span>
+                      {content.title}
+                    </a>
+                  </li>
+                ))
+            }
+          </ul>
+        </section>
+      </div>
     </section>
   </article>
-  <!-- <script is:inline src="/assets/service-filtering-ui.js"></script> -->
 </Layout>
+<!-- <script is:inline src="/assets/service-filtering-ui.js"></script> -->
