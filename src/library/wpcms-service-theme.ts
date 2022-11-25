@@ -9,7 +9,7 @@ export const getThemes = async () => {
 async function fetchAPI(query, { variables } = {}) {
   const headers = { "Content-Type": "application/json" };
   const res = await fetch(
-    "http://practicearimuraryomacom.local/wp-json/wp/api/service_theme",
+    "https://jamstack-test.develop999.net/wp-json/wp/api/service_theme",
     {
       method: "GET",
       headers,

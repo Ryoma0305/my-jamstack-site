@@ -118,25 +118,17 @@ const service = await getBlogDetail2(serviceId as string);
       <header class="l-contents__wrapper c-section-header">
         <h2 class="c-section-header__heading">その他のおすすめサービス</h2>
       </header>
-      {
-        /*
       <div class="l-contents__wrapper p-service-detail-recommend">
         {
           response2.contents
             .filter((content: any) => {
-              if (content.service_tag == false) {
-                return false;
-              }
-
               if (content.id == service.id) {
                 return false;
               }
+
               if (
                 content.service_tag[0].term_id == service.service_tag[0].term_id
               ) {
-                console.log(content.service_tag[0].term_id);
-                console.log(service.service_tag[0].term_id);
-                console.log("trueです");
                 return true;
               }
             })
@@ -174,8 +166,6 @@ const service = await getBlogDetail2(serviceId as string);
             ))
         }
       </div>
-      */
-      }
     </section>
     <div class="l-sticky-footer p-sticky-footer">
       <a href="/entry" class="c-button -primary -contained -fix">申し込む</a>

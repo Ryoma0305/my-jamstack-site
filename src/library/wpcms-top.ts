@@ -10,7 +10,7 @@ export const getTopSlides = async () => {
 async function fetchAPI(query, { variables } = {}) {
   const headers = { "Content-Type": "application/json" };
   const res = await fetch(
-    "http://practicearimuraryomacom.local/wp-json/wp/api/top",
+    "https://jamstack-test.develop999.net/wp-json/wp/api/top",
     {
       method: "GET",
       headers,

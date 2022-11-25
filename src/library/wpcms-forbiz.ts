@@ -17,7 +17,7 @@ export const getForbizDetail = async (contentId: string) => {
 async function fetchAPI(query, { variables } = {}) {
   const headers = { "Content-Type": "application/json" };
   const res = await fetch(
-    "http://practicearimuraryomacom.local/wp-json/wp/api/forbiz",
+    "https://jamstack-test.develop999.net/wp-json/wp/api/forbiz",
     {
       method: "GET",
       headers,

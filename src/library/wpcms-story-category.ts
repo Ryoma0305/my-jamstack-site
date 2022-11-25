@@ -9,7 +9,7 @@ export const getCategories = async () => {
 async function fetchAPI(query, { variables } = {}) {
   const headers = { "Content-Type": "application/json" };
   const res = await fetch(
-    "http://practicearimuraryomacom.local/wp-json/wp/api/story_category",
+    "https://jamstack-test.develop999.net/wp-json/wp/api/story_category",
     {
       method: "GET",
       headers,
