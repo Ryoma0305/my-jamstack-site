@@ -4,6 +4,7 @@ import {
   getStoryPosts,
   getStoryPostDetail,
   getStoryPostNext,
+  getStoryPostPrev,
 } from "../../library/wpcms-stories";
 
 // 詳細記事ページの全パスを取得
@@ -20,6 +21,7 @@ export async function getStaticPaths() {
 const { storyId } = Astro.params;
 const story = await getStoryPostDetail(storyId as string);
 const next = await getStoryPostNext(storyId as string);
+const prev = await getStoryPostPrev(storyId as string);
 ---
 
 <Layout title="My first blog with Astro">
@@ -53,20 +55,30 @@ const next = await getStoryPostNext(storyId as string);
 
       <nav class="navigation post-navigation" aria-label="前後の記事へのリンク">
         <div class="nav-links">
-          <div class="nav-previous">
-            <a href="https://hagukumu.develop999.net/stories/513/" rel="prev"
-              ><span class="prev-text">前の記事</span><span class="prev-title"
-                >with LIFEで関われる はぐくむを育んでいきたい</span
-              >
-            </a>
-          </div>
-          <div class="nav-next">
-            <a href={"/stories/" + next.id} rel="next"
-              ><span class="next-text">次の記事</span><span class="next-title"
-                >僕がはぐくむで働くまでの物語</span
-              >
-            </a>
-          </div>
+          {
+            prev && (
+              <div class="nav-previous">
+                <a href={"/stories/" + prev.id} rel="prev">
+                  <>
+                    <span class="prev-text">前の記事</span>
+                    <span class="prev-title">{prev.title}</span>
+                  </>
+                </a>
+              </div>
+            )
+          }
+          {
+            next && (
+              <div class="nav-next">
+                <a href={"/stories/" + next.id} rel="next">
+                  <>
+                    <span class="next-text">次の記事</span>
+                    <span class="next-title">{next.title}</span>
+                  </>
+                </a>
+              </div>
+            )
+          }
         </div>
       </nav>
       <!--/ 前後記事へのリンク -->

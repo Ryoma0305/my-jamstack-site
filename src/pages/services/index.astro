@@ -25,41 +25,38 @@ const themes = await getThemes({ fields: ["id", "title"] });
         <form method="get" id="form-pc">
           <div class="p-service-header__filter-area">
             <div class="p-service-header__tab-list u-hidden-md-down">
-              <label class="c-radio-tab">
-                <div class="c-radio-tab" style="z-index:1">
-                  <a href="/services/" class="c-radio-tab__label"> All</a>
-                </div>
-                {
-                  categories.contents.map((content: any) => (
-                    <div class="c-radio-tab" style="z-index:1">
-                      <a
-                        href={"/services/category/" + content.slug}
-                        class="c-radio-tab__label"
-                      >
-                        {content.name}
-                      </a>
-                    </div>
-                  ))
-                }
-              </label>
-
-              <div
-                class="p-service-header__tag-list u-hidden-md-down"
-                id="js_category_pc"
-              >
-                {
-                  themes.contents.map((content: any) => (
-                    <div class="c-radio-tag" style="z-index:1">
-                      <a
-                        href={"/services/theme/" + content.slug}
-                        class="c-radio-tag__label"
-                      >
-                        {content.name}
-                      </a>
-                    </div>
-                  ))
-                }
+              <div class="c-radio-tab" style="z-index:1">
+                <a href="/services/" class="c-radio-tab__label"> All</a>
               </div>
+              {
+                categories.contents.map((content: any) => (
+                  <div class="c-radio-tab" style="z-index:1">
+                    <a
+                      href={"/services/category/" + content.slug}
+                      class="c-radio-tab__label"
+                    >
+                      {content.name}
+                    </a>
+                  </div>
+                ))
+              }
+            </div>
+            <div
+              class="p-service-header__tag-list u-hidden-md-down"
+              id="js_category_pc"
+            >
+              {
+                themes.contents.map((content: any) => (
+                  <div class="c-radio-tag" style="z-index:1">
+                    <a
+                      href={"/services/theme/" + content.slug}
+                      class="c-radio-tag__label"
+                    >
+                      {content.name}
+                    </a>
+                  </div>
+                ))
+              }
             </div>
           </div>
           <div class="u-hidden-md-up">

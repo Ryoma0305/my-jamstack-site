@@ -1,10 +1,31 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import Layout from "../../../layouts/Layout.astro";
 
-import { getStoryPosts } from "../../library/wpcms-stories";
-import { getCategories } from "../../library/wpcms-story-category";
+import { getStoryPosts } from "../../../library/wpcms-stories";
+import { getCategories } from "../../../library/wpcms-story-category";
 const response2 = await getStoryPosts({ fields: ["id", "title"] });
 const categories = await getCategories({ fields: ["id", "title"] });
+
+export async function getStaticPaths() {
+  const response = await getStoryPosts({ fields: ["id"] });
+  const ret = response.contents.map((content: any) => ({
+    params: {
+      storyCategorySlug: content.category_slug,
+    },
+  }));
+  return ret;
+}
+
+const { storyCategorySlug } = Astro.params;
+const response3 = await getStoryPosts();
+
+const story_categories = response3.contents
+  .filter((content: any) => {
+    return content.category_slug;
+  })
+  .filter((content: any) => {
+    return content.category_slug == storyCategorySlug;
+  });
 ---
 
 <Layout title="My first blog with Astro">
@@ -25,14 +46,16 @@ const categories = await getCategories({ fields: ["id", "title"] });
             <div class="p-story-header__tag-list">
               {
                 categories.contents.map((content: any) => (
-                  <div class="c-radio-tab" style="z-index:1">
-                    <a
-                      href={"/stories/category/" + content.slug}
-                      class="c-radio-tag__label"
-                    >
-                      {content.name}
-                    </a>
-                  </div>
+                  <>
+                    <div class="c-radio-tab" style="z-index:1">
+                      <a
+                        href={"/stories/category/" + content.slug}
+                        class="c-radio-tag__label"
+                      >
+                        {content.name}
+                      </a>
+                    </div>
+                  </>
                 ))
               }
             </div>
@@ -184,7 +207,7 @@ const categories = await getCategories({ fields: ["id", "title"] });
       <div class="p-story-body">
         <ul class="p-story-body__list js-fade-in-scroll-ul">
           {
-            response2.contents.map((content: any) => (
+            story_categories.map((content: any) => (
               <li class="p-story js-fade-in-scroll-li">
                 <a class="p-story__text" href={"/stories/" + content.id}>
                   {content.title}
