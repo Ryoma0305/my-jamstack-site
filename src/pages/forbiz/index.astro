@@ -11,16 +11,10 @@ const programs = await getForbizPrograms({ fields: ["id", "title"] });
 <Layout title="My first blog with Astro">
   <div class="p-forbiz-kv1">
     <div class="p-forbiz-kv1__inner1 js-fade-in-scroll-ul">
-      <h1
-        class="p-forbiz-kv1__title1 js-fade-in-scroll-li"
-        style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-      >
+      <h1 class="p-forbiz-kv1__title1 js-fade-in-scroll-li">
         WORK <br />DESIGN
       </h1>
-      <p
-        class="p-forbiz-kv1__text1 js-fade-in-scroll-li"
-        style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-      >
+      <p class="p-forbiz-kv1__text1 js-fade-in-scroll-li">
         会社は何のために存在しているのか？<br
         />自分達は何を目指し、何のために活動しているのか？<br
         />会社は利益のために存在しているわけでもないし、社員は会社の数字を上げるために存在しているわけでもない。<br
@@ -31,16 +25,10 @@ const programs = await getForbizPrograms({ fields: ["id", "title"] });
   </div>
   <section class="p-forbiz-block1 p-forbiz-block1__scroll-margin">
     <div class="p-forbiz-block1__inner1">
-      <h2
-        class="p-forbiz-block1__title1 js-fade-in-scroll"
-        style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-      >
+      <h2 class="p-forbiz-block1__title1 js-fade-in-scroll">
         森のような<br />組織づくりの物語
       </h2>
-      <p
-        class="p-forbiz-block1__text1 js-fade-in-scroll"
-        style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-      >
+      <p class="p-forbiz-block1__text1 js-fade-in-scroll">
         はぐくむではこれまで業種や規模を問わずさまざまな企業様に対して、<br
         />組織づくりのお手伝いをさせていただきました。<br
         />その中で生まれた物語の一部をご紹介いたします。
@@ -48,10 +36,7 @@ const programs = await getForbizPrograms({ fields: ["id", "title"] });
       <ul class="p-forbiz-block1__list p-story-body__list js-fade-in-scroll-ul">
         {
           response.contents.map((content: any) => (
-            <li
-              class="p-story js-fade-in-scroll-li"
-              style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-            >
+            <li class="p-story js-fade-in-scroll-li">
               <a class="p-story__text" href={"/stories/" + content.id}>
                 {content.title}
               </a>
@@ -76,10 +61,7 @@ const programs = await getForbizPrograms({ fields: ["id", "title"] });
           ))
         }
       </ul>
-      <p
-        class="p-forbiz-block1__button1 js-fade-in-scroll"
-        style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-      >
+      <p class="p-forbiz-block1__button1 js-fade-in-scroll">
         <a
           href="/stories/?category=work-design"
           class="c-button -primary -fix -for-biz"
@@ -87,10 +69,7 @@ const programs = await getForbizPrograms({ fields: ["id", "title"] });
           ストーリー 一覧
         </a>
       </p>
-      <p
-        class="p-forbiz-block1__banner1 js-fade-in-scroll"
-        style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-      >
+      <p class="p-forbiz-block1__banner1 js-fade-in-scroll">
         <a href="https://anchor.fm/vhcc3m7vopg" target="_blank">
           <span class="p-forbiz-block1__banner1__sp1"
             ><img
@@ -111,16 +90,10 @@ const programs = await getForbizPrograms({ fields: ["id", "title"] });
   <section class="p-forbiz-block2 p-forbiz-block2__scroll-margin" id="section1">
     <div class="p-forbiz-block2__inner1">
       <div class="js-fade-in-scroll-ul">
-        <h2
-          class="p-forbiz-block2__title1 js-fade-in-scroll-li"
-          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-        >
+        <h2 class="p-forbiz-block2__title1 js-fade-in-scroll-li">
           森のような組織を<br />はぐくむためにできること
         </h2>
-        <p
-          class="p-forbiz-block2__text1 js-fade-in-scroll-li"
-          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-        >
+        <p class="p-forbiz-block2__text1 js-fade-in-scroll-li">
           一人ひとりの才能や個性を発揮するために、企業・組織に伴走する6つのプログラム。<br
           />対話を通じて想いを言葉にし、チームの関係性を整え、<br
           />そのチームに相応しい文化をはぐくみます。
@@ -129,10 +102,7 @@ const programs = await getForbizPrograms({ fields: ["id", "title"] });
       <ul class="p-forbiz-block2__list1 js-fade-in-scroll-ul">
         {
           programs.contents.map((content: any) => (
-            <li
-              class="js-fade-in-scroll-li"
-              style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-            >
+            <li class="js-fade-in-scroll-li">
               <div class="p-forbiz-block2__unit1">
                 <h3 class="p-forbiz-block2__unit1__title1">
                   {content.program_title}
@@ -146,10 +116,7 @@ const programs = await getForbizPrograms({ fields: ["id", "title"] });
         }
       </ul>
       <div class="js-fade-in-scroll-ul">
-        <p
-          class="p-forbiz-block2__banner1 js-fade-in-scroll-li"
-          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-        >
+        <p class="p-forbiz-block2__banner1 js-fade-in-scroll-li">
           <a href="/stories/559/">
             <span class="p-forbiz-block2__banner1__sp1"
               ><img
@@ -165,10 +132,7 @@ const programs = await getForbizPrograms({ fields: ["id", "title"] });
             </span>
           </a>
         </p>
-        <p
-          class="p-forbiz-block2__banner1 js-fade-in-scroll-li"
-          style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-        >
+        <p class="p-forbiz-block2__banner1 js-fade-in-scroll-li">
           <a href="/entry-forbiz">
             <span class="p-forbiz-block2__banner1__sp1"
               ><img

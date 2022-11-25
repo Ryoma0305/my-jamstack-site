@@ -4,7 +4,6 @@
 export const getForbizPrograms = async () => {
   //   return await client.get<BlogResponse>({ endpoint: "blogs", queries });
   const data = await fetchAPI("", {});
-  console.log(data);
   return { contents: data };
 };
 

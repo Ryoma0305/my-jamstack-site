@@ -14,41 +14,10 @@ export const getStoryPostDetail = async (contentId: string) => {
   })[0];
 };
 
-export const getStoryPostNext = async (contentId: string) => {
-  const data = await fetchAPI("", {});
-  for (let index = 0; index < data.length; index++) {
-    if (data[index].id == contentId) {
-      if (index < data.length) {
-        return data[index + 1];
-      } else {
-        return null;
-      }
-    }
-  }
-  return null;
-  // return data.filter((item: any) => {
-  //   return item.id == contentId;
-  // })[0];
-};
-
-export const getStoryPostPrev = async (contentId: string) => {
-  const data = await fetchAPI("", {});
-  for (let index = 0; index < data.length; index++) {
-    if (data[index].id == contentId) {
-      if (index > 0) {
-        return data[index - 1];
-      } else {
-        return null;
-      }
-    }
-  }
-  return null;
-};
-
 async function fetchAPI(query, { variables } = {}) {
   const headers = { "Content-Type": "application/json" };
   const res = await fetch(
-    "http://practicearimuraryomacom.local/wp-json/wp/api/stories",
+    "http://practicearimuraryomacom.local/wp-json/wp/api/stories-detail2/(?P<id>[d]+)",
     {
       method: "GET",
       headers,
@@ -56,9 +25,10 @@ async function fetchAPI(query, { variables } = {}) {
     }
   );
 
-  // console.log(res);
+  console.log(res);
 
   const json = await res.json();
+  //   console.log(json);
   return json.map((item: any) => {
     return {
       id: item.ID,

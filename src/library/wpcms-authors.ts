@@ -4,8 +4,6 @@
 export const getAuthors = async () => {
   //   return await client.get<BlogResponse>({ endpoint: "blogs", queries });
   const data = await fetchAPI("", {});
-  console.log("dataです");
-  console.log(data);
   return { contents: data };
 };
 

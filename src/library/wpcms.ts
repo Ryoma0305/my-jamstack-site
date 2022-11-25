@@ -27,7 +27,7 @@ export const getBlogDetail2 = async (contentId: string) => {
   const ret = data.filter((item: any) => {
     return item.id == contentId;
   })[0];
-  console.log(ret);
+  // console.log(ret);
   return ret;
 };
 
@@ -48,7 +48,7 @@ async function fetchAPI(query, { variables } = {}) {
     if (!item.service_tag) {
       item.service_tag = [];
     }
-    // console.log(item.service_category);
+    // console.log(item.service_theme);
     return {
       id: item.ID,
       createdAt: item.date,

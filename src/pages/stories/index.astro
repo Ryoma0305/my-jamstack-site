@@ -197,10 +197,7 @@ const categories = await getCategories({ fields: ["id", "title"] });
         <ul class="p-story-body__list js-fade-in-scroll-ul">
           {
             response2.contents.map((content: any) => (
-              <li
-                class="p-story js-fade-in-scroll-li"
-                style="transform: translate(0px, 0px); opacity: 1; visibility: inherit;"
-              >
+              <li class="p-story js-fade-in-scroll-li">
                 <a class="p-story__text" href={"/stories/" + content.id}>
                   {content.title}
                 </a>
@@ -246,3 +243,54 @@ const categories = await getCategories({ fields: ["id", "title"] });
     </div>
   </section>
 </Layout>
+<!-- もっと見るボタンクリックで記事追加表示 -->
+<script>
+  let moreNum = 0;
+  if (
+    navigator.userAgent.indexOf("iPhone") > 0 ||
+    (navigator.userAgent.indexOf("Android") > 0 &&
+      navigator.userAgent.indexOf("Mobile") > 0)
+  ) {
+    moreNum = 6;
+    // スマホ
+  } else if (
+    navigator.userAgent.indexOf("iPad") > 0 ||
+    navigator.userAgent.indexOf("Android") > 0
+  ) {
+    moreNum = 12;
+    // タブレット
+  } else {
+    moreNum = 12;
+    // PC
+  }
+
+  $(".p-story:nth-child(n + " + (moreNum + 1) + ")").addClass("is-hidden");
+
+  $(".p-story-body__button").on("click", function () {
+    $(".p-story.is-hidden").slice(0, moreNum).removeClass("is-hidden");
+    if ($(".p-story.is-hidden").length == 0) {
+      $(".p-story-body__button").fadeOut();
+    }
+  });
+
+  $(function () {
+    var list = $(".p-story-body__list .p-story").length;
+    if (list < moreNum) {
+      $(".p-story-body__button").addClass("is-hidden");
+    }
+  });
+</script>
+<!--/ もっと見るボタンクリックで記事追加表示 -->
+
+<!-- ボタンに選択中タグ名表示 -->
+<script>
+  let active_input = document.querySelector(
+    "input:checked + span .js-label-name"
+  )
+    ? document.querySelector("input:checked + span .js-label-name").textContent
+    : "All";
+  const current_tag = document.querySelector(".js-current-tag");
+  current_tag.textContent = active_input;
+</script>
+<!--/ ボタンに選択中タグ名表示 -->
+<!-- <script is:inline src="/assets/story-filtering-ui.js"></script> -->

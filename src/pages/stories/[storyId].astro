@@ -1,6 +1,10 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getStoryPosts, getStoryPostDetail } from "../../library/wpcms-stories";
+import {
+  getStoryPosts,
+  getStoryPostDetail,
+  getStoryPostNext,
+} from "../../library/wpcms-stories";
 
 // 詳細記事ページの全パスを取得
 export async function getStaticPaths() {
@@ -15,6 +19,7 @@ export async function getStaticPaths() {
 //記事の詳細情報を取得
 const { storyId } = Astro.params;
 const story = await getStoryPostDetail(storyId as string);
+const next = await getStoryPostNext(storyId as string);
 ---
 
 <Layout title="My first blog with Astro">
@@ -49,9 +54,16 @@ const story = await getStoryPostDetail(storyId as string);
       <nav class="navigation post-navigation" aria-label="前後の記事へのリンク">
         <div class="nav-links">
           <div class="nav-previous">
-            <a href="https://hagukumu.develop999.net/stories/560/" rel="prev"
+            <a href="https://hagukumu.develop999.net/stories/513/" rel="prev"
               ><span class="prev-text">前の記事</span><span class="prev-title"
-                >『LIFE SHIFT 2』を片手に、自分の人生戦略を問い直す</span
+                >with LIFEで関われる はぐくむを育んでいきたい</span
+              >
+            </a>
+          </div>
+          <div class="nav-next">
+            <a href={"/stories/" + next.id} rel="next"
+              ><span class="next-text">次の記事</span><span class="next-title"
+                >僕がはぐくむで働くまでの物語</span
               >
             </a>
           </div>
